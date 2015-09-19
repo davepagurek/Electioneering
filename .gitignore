@@ -1,3 +1,4 @@
+.DS_Store
 public/components
 node_modules
 .sass-cache/
