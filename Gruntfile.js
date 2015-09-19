@@ -33,7 +33,7 @@ module.exports = function(grunt) {
           filename: "app.js",
           path: path.join(__dirname, "public/javascripts/")
         },
-        devtool: "#inline-source-map",
+        devtool: "#source-map",
         debug: true,
         watch: true,
         module: {
