@@ -22,7 +22,7 @@ function averagify(array){
   })
 }
 
-export class User {
+export class Person {
   constructor(data) {
     this.name = data.name;
     this.age = data.age;
