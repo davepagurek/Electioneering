@@ -3,6 +3,7 @@ var path = require("path");
 
 module.exports = function(grunt) {
 
+  var rubyChild = null;
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -17,6 +18,10 @@ module.exports = function(grunt) {
       css: {
         files: ['stylesheets/*.scss'],
         tasks: ['sass:everything']
+      },
+      ruby: {
+        files: ['server.rb'],
+        tasks: ['runserver']
       }
     },
 
@@ -45,12 +50,31 @@ module.exports = function(grunt) {
     },
   });
 
+  grunt.registerTask('runserver', 'Run the sinatra server', function() {
+
+    if (rubyChild) {
+      rubyChild.kill();
+    }
+    rubyChild = grunt.util.spawn({
+      cmd: "ruby",
+      args: ['server.rb'],
+      opts: {stdio: 'inherit'},
+    })
+
+  });
+
+  process.on('exit', function(){
+    if (rubyChild) {
+      rubyChild.kill();
+    }
+  })
+
   // Load the plugin that provides the "uglify" task.
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-webpack');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
   // Default task(s).
-  grunt.registerTask('default', ['webpack:everything', 'sass', 'watch']);
+  grunt.registerTask('default', ['webpack:everything', 'sass', 'runserver', 'watch']);
 
 };
