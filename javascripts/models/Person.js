@@ -33,6 +33,11 @@ export default class Person {
 
   update(parties, importance = 0.5) {
     console.log("RUNNING UPDATE");
+
+    if (importance == 1.0) {
+      this.parties = Array.apply(null, new Array(parties.length)).map(() => {return 0;});
+    }
+
     var likeness = Array.apply(null, new Array(parties.length)).map(() => {return 0;}); // [-1, 1]
     var max_likeness_per_issue = 1/this.views.length;
 
