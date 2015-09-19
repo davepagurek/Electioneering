@@ -2,6 +2,7 @@
 var cheerio = require("cheerio");
 var rp = require("request-promise");
 var _ = require("lodash");
+var fs = require("fs");
 
 var BASE_URL = "http://canada.isidewith.com"
 
@@ -53,37 +54,51 @@ function getProvincialPollData(pollUrl){
     promises.push(Promise.all([Promise.resolve(province), getUrl(url)]));
   })
 
+  var result = {
+    "saidYes": {},
+    "saidNo": {},
+  };
+
   return Promise.all(promises)
     .then(function(data){
       data = _.zipObject(data);
-      data = _.mapValues(data, function($){
+      _.forIn(data, function($, province){
 
         var yes_result = parseFloat($(".yes_or_no .yes .perc").text()) / 100;
         var no_result = parseFloat($(".yes_or_no .no .perc").text()) / 100;
         console.log("yes: %d, no: %d", yes_result, no_result);
 
-        return {
-          yes: yes_result,
-          no: no_result
-        };
+        result.saidYes[province] = yes_result;
+        result.saidNo[province] = no_result;
       });
-      return Promise.resolve(data);
+      return Promise.resolve(result);
     });
 }
 
 function main() {
   getQuestions()
     .then(function(questions){
-      questions = _.pairs(questions).slice(0,2).map(function(question){
+      questions = _.pairs(questions).map(function(question){
         return Promise.all([Promise.resolve(question[0]), getProvincialPollData(question[1])]);
       })
       return Promise.all(questions)
     })
     .then(function(result){
-      return Promise.resolve(_.zipObject(result));
+      return Promise.resolve(_.map(result, function(element){
+        var question = element[0];
+        var saidYesNo = element[1];
+        return _.assign({question: question}, saidYesNo);
+      }));
     })
     .then(function(result){
       console.log(result);
+
+      if (process.argv.length > 2) {
+        var filename = process.argv[2];
+        fs.writeFile(filename, JSON.stringify(result));
+      }
+
+      return result;
     })
     .catch(console.error);
 }
