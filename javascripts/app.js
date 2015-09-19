@@ -13,13 +13,6 @@ var parties = [
   }
 ];
 
-var stances = [
-  "Should corporations, unions, and non-profit organizations be allowed to donate to political parties?",
-  "Should Canada switch to a proportional representation voting system?",
-  "Should the federal government be able to monitor phone calls and emails?",
-  "Should Canadian aboriginals receive more government funds?"
-];
-
 var people = {
   // ID of the square to list of people
   // square ID corresponds to metadata file as well as SVG element ids
@@ -41,14 +34,16 @@ function onChallengeAccepted() {
 
   _.forIn(people, function(persons, location){
     var filter = this.filter.apply(this, [location]);
-    persons.filter(filter).forEach((person) => person.update(parties));
+    _.filter(persons).forEach((person) => person.update(parties));
   }.bind(this));
 }
 
 function loadData() {
   $.getJSON( "data/people.json", function( data ) {
     people = _.mapValues(data, function(p) {
-      return new Person(p);
+      return _.map(p, function(p){
+        return new Person(p);
+      });
     });
   });
   $.getJSON( "data/questions.json", function( data ) {
