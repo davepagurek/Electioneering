@@ -45,7 +45,7 @@ export class Person {
 
       });
     });
-    
+
     likeness = likeness.map((element) => {
       return constraint(0,1,(element + 1) / 2);
     })
