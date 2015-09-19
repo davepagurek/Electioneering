@@ -4,3 +4,4 @@ node_modules
 .sass-cache/
 /public/javascripts/app.js*
 /public/stylesheets/app.css*
+data/*
