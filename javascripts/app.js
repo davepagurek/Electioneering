@@ -15,6 +15,22 @@ var stances = [
   "Should Canadian aboriginals receive more government funds?"
 ];
 
+var people = {
+  // ID of the square to list of people
+  // square ID corresponds to metadata file as well as SVG element ids
+  "x50y90" : [
+    {
+      // may do this in JS on demand, it makes file bigger for little gain
+      "name" : "Bob Jepsen",
+      "age": 32,
+      // corresponds with order in questions file
+      "views": [0.2,0.9,-0.8,-0.1,0.8,0.4],
+      // corresponds with the order in parties file, normalized to sum to 1
+      "parties": [0.2,0.6,0.2]
+    }
+  ]
+};
+
 $(document).ready(function(){
   var svg = $("svg");
   $("rect").on("mouseover", function() {
