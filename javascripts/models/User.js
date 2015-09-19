@@ -1,6 +1,4 @@
 
-var delta_exponent = 2;
-
 function constraint(min, max, num) {
   if (num > max) {
     return max;
@@ -40,20 +38,19 @@ export class User {
     parties.forEach((party, partyIndex) => {
       this.views.forEach((view, viewIndex) => {
         var partyView = party.views[viewIndex];
-        var delta = Math.pow(partyView - view, delta_exponent); // [0, 4]
+        var selfImportance = Math.abs(view); // [0,1] - describes how important this issue is
+        var delta = Math.pow(partyView - view, 2) * selfImportance * 2; // [-2, 2]
 
-        likeness[partyIndex] += max_likeness_per_issue * (1 - delta/Math.pow(2,delta_exponent));
+        likeness[partyIndex] += max_likeness_per_issue * (1 - Math.abs(delta));
 
       });
     });
     
     likeness = likeness.map((element) => {
-      return constraint(0,1,element);
-    });
+      return constraint(0,1,(element + 1) / 2);
+    })
 
     var affinities = averagify(likeness);
-
-    console.log(likeness);
 
     // Finally, reconcile affinities and this.parties based on importance
     this.parties = averagify(this.parties.map(function(element, index){
