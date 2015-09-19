@@ -124,14 +124,16 @@ MARGIN = 1
 GRID = RECT_SIZE + MARGIN
 def map_svg(squares, image)
   builder = Builder::XmlMarkup.new(indent: 2)
+  w = image.width * GRID
+  h = image.height * GRID
   attrs = {
-    'width' => image.width * GRID,
-    'height' => image.height * GRID,
     'version' => "1.1",
     'baseProfile' => "full",
     'xmlns' => "http://www.w3.org/2000/svg",
     'xmlns:xlink' => "http://www.w3.org/1999/xlink",
     'xmlns:ev' => "http://www.w3.org/2001/xml-events",
+    'class' => "map-svg",
+    'viewBox' => "0 0 #{w} #{h}"
   }
   builder.svg(attrs) do |b|
     squares.each do |sq|
