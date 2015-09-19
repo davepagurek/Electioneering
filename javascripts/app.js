@@ -1,8 +1,10 @@
 var _ = require("lodash");
 var $ = require("jquery");
+var tweets = require("./tweets.js");
 
 var Stance = require("./ui/Stance.js");
 var Opportunity = require("./ui/Opportunity.js");
+var Tweet = require("./ui/Tweet.js");
 
 var politician = {
   opinions: []
@@ -38,6 +40,15 @@ $(document).ready(function(){
   });
 
   stances.forEach((stance, i) => $("#stances").append(new Stance(politician, stance, i).element));
+
+  setInterval(() => {
+    let riding = _.sample(document.getElementsByClassName("sq"));
+    svg.append($(riding));
+    $("#game").append(new Tweet(
+      _.sample(tweets).tweet,
+      riding.id
+    ).element);
+  }, 5000);
 
   //Test thing
   setTimeout(() => {

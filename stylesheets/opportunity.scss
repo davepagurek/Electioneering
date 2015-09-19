@@ -25,23 +25,6 @@
     font-weight: lighter;
   }
 
-  .opportunity_close {
-    border:0;
-    background-color:$highlight;
-    color:$bright;
-    padding:8px 10px;
-    border-radius:5px;
-    position:absolute;
-    right: 10px;
-    top:10px;
-    transition: all 0.3s ease;
-    cursor:pointer;
-
-    &:hover {
-      background-color: $highlight_lighter;
-    }
-  }
-
   .opportunity_do {
     border:0;
     background-color:$medium_darker;
