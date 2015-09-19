@@ -5,7 +5,7 @@ export default class Opportunity {
     this.element = $(
       `
       <div class="opportunity animated bounceIn">
-        <button class="opportunity_close">
+        <button class="close">
           <i class="fa fa-times"></i>
         </button>
         <h3></h3>
@@ -13,7 +13,7 @@ export default class Opportunity {
       </div>
       `
     );
-    this.element.find(".opportunity_close").on("click", () => {
+    this.element.find(".close").on("click", () => {
       this.remove();
     });
     this.element.find(".opportunity_do").text(action).on("click", () => {

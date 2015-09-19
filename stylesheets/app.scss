@@ -2,6 +2,7 @@
 @import 'colors';
 @import 'alignment';
 @import 'opportunity';
+@import 'tweet';
 
 /* Main */
 
@@ -38,6 +39,23 @@ body {
   display:flex;
   flex-direction: row;
   align-items: stretch;
+}
+
+.close {
+  border:0;
+  background-color:$highlight;
+  color:$bright;
+  padding:8px 10px;
+  border-radius:5px;
+  position:absolute;
+  right: 10px;
+  top:10px;
+  transition: all 0.3s ease;
+  cursor:pointer;
+
+  &:hover {
+    background-color: $highlight_lighter;
+  }
 }
 
 *::-webkit-scrollbar-track {
@@ -82,21 +100,13 @@ body {
 
     rect {
       border-style:solid;
-      /*position:relative;*/
-      /*z-index: 1;*/
       stroke-width:0;
       transition: all ease 0.2s;
-      /*transform-origin:50% 50%;*/
 
-      &:hover {
+      &:hover, &.selected {
         opacity:1;
         transition: all ease 0.2s;
         stroke-width:10;
-        /*border-width:5px !important;*/
-        /*transform:scale(1.2, 1.2);*/
-        /*fill: #FFF !important;*/
-        /*z-index:999;*/
-        /*box-shadow: 0 0 50px rgba(0,0,0,255);*/
       }
     }
   }

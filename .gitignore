@@ -4,3 +4,6 @@ node_modules
 .sass-cache/
 /public/javascripts/app.js*
 /public/stylesheets/app.css*
+public/data/people.json
+public/data/squares.json
+public/data/map.svg

@@ -1,9 +1,11 @@
 var _ = require("lodash");
 var $ = require("jquery");
+var tweets = require("./tweets.js");
 
 var Stance = require("./ui/Stance.js");
 var Opportunity = require("./ui/Opportunity.js");
 var Person = require("./models/Person");
+var Tweet = require("./ui/Tweet.js");
 
 var parties = [
   {
@@ -43,15 +45,33 @@ function onChallengeAccepted() {
   }.bind(this));
 }
 
+function loadData() {
+  $.getJSON( "data/people.json", function( data ) {
+    people = _.mapValues(data, function(p) {
+      return new Person(p);
+    });
+  });
+  $.getJSON( "data/questions.json", function( data ) {
+    data.forEach((stance, i) => $("#stances").append(new Stance(parties[0], stance.question, i).element));
+  });
+}
+
 $(document).ready(function(){
   var svg = $("svg");
   $("rect").on("mouseover", function() {
     svg.append($(this));
   });
 
-  parties.forEach((party) => {
-    stances.forEach((stance, i) => $("#stances").append(new Stance(party, stance, i).element));
-  })
+  loadData();
+
+  setInterval(() => {
+    let riding = _.sample(document.getElementsByClassName("sq"));
+    svg.append($(riding));
+    $("#game").append(new Tweet(
+      _.sample(tweets).tweet,
+      riding.id
+    ).element);
+  }, 5000);
 
   //Test thing
   setInterval(() => {

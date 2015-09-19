@@ -67,7 +67,7 @@ def image_squares(image)
 end
 
 def pop_noise(avg)
-  (rand()*(avg/10)).to_i
+  ((rand()-0.5)*(avg/10)).to_i
 end
 
 def allocate_population_prov(squares, pool)
@@ -90,7 +90,8 @@ def transform_squares(squares)
   squares.each do |sq|
     hash["x#{sq[:x]}y#{sq[:y]}"] = {
       "prov" => sq[:province][:name],
-      "city" => sq[:city]
+      "city" => sq[:city],
+      "pop" => sq[:pop]
     }
   end
   hash
@@ -106,7 +107,7 @@ p squares.count
 # p squares.min_by {|s| s[:pop]}
 p squares.sample(10)
 transformed_squares = transform_squares(squares)
-File.open("data/squares.json",'w') do |f|
+File.open("public/data/squares.json",'w') do |f|
   f.puts JSON.dump(transformed_squares)
 end
 
@@ -151,6 +152,6 @@ def map_svg(squares, image)
 end
 
 svg = map_svg(squares, image)
-File.open("data/map.svg",'w') do |f|
+File.open("public/data/map.svg",'w') do |f|
   f.puts svg
 end
