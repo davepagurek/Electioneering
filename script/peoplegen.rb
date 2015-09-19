@@ -3,8 +3,8 @@ require 'pp'
 
 POP_DIV = 10_000
 
-QUESTIONS = JSON.load(IO.read('data/questions.json'))
-SQUARES = JSON.load(IO.read('data/squares.json'))
+QUESTIONS = JSON.load(IO.read('public/data/questions.json'))
+SQUARES = JSON.load(IO.read('public/data/squares.json'))
 
 def fuzz(x)
   x + (rand()-0.5)*2*0.2
@@ -39,6 +39,6 @@ end
 
 res.sample(10).each {|e| p e}
 
-File.open("data/people.json",'w') do |f|
+File.open("public/data/people.json",'w') do |f|
   f.puts JSON.dump(res.to_h)
 end

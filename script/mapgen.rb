@@ -107,7 +107,7 @@ p squares.count
 # p squares.min_by {|s| s[:pop]}
 p squares.sample(10)
 transformed_squares = transform_squares(squares)
-File.open("data/squares.json",'w') do |f|
+File.open("public/data/squares.json",'w') do |f|
   f.puts JSON.dump(transformed_squares)
 end
 
@@ -152,6 +152,6 @@ def map_svg(squares, image)
 end
 
 svg = map_svg(squares, image)
-File.open("data/map.svg",'w') do |f|
+File.open("public/data/map.svg",'w') do |f|
   f.puts svg
 end
