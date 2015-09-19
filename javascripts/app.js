@@ -111,3 +111,18 @@ $(document).ready(function(){
 
 
 });
+
+var getPoll = function() {
+    // Poll methods:
+    // * Phone
+    // * Online
+    // * Door to door
+    // * Mail
+    var r = Math.random();
+    if (r < 0.25) {
+
+    } else if (r < 0.5) {
+    } else if (r < 0.75) {
+    } else {
+    }
+}
