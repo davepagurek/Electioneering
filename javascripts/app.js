@@ -1,13 +1,13 @@
-let _ = require("lodash");
-let $ = require("jquery");
+var _ = require("lodash");
+var $ = require("jquery");
 
-let Stance = require("./ui/Stance.js");
+var Stance = require("./ui/Stance.js");
 
-let politician = {
+var politician = {
   opinions: []
 };
 
-let stances = [
+var stances = [
   "Should corporations, unions, and non-profit organizations be allowed to donate to political parties?",
   "Should Canada switch to a proportional representation voting system?",
   "Should the federal government be able to monitor phone calls and emails?",
