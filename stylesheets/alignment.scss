@@ -5,22 +5,17 @@
 
   .alignment_slider {
     border-radius:5px;
-    user-select: none;
     margin:10px 0;
     border-bottom:5px solid rgba(0,0,0,0.2);
-    position:relative;
   }
 
   .alignment_selector {
-    user-select:none;
     width:20px;
     height:20px;
     border-radius:50%;
-    position:absolute;
-    margin-left:-10px;
+    float:left;
+    margin-left:90px;
     margin-top:-7.5px;
-    top:0;
-    left:50%;
     background-color:$medium_darker;
     cursor:pointer;
     transition:all ease 0.3s;

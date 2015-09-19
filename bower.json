@@ -19,6 +19,7 @@
   "dependencies": {
     "font-awesome": "~4.4.0",
     "jquery": "~2.1.4",
+    "jquery-ui": "~1.10",
     "lodash": "~3.10.1",
     "prefixfree": "prefix-free#gh-pages"
   }
