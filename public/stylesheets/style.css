@@ -75,10 +75,13 @@ body {
 }
 
 #sidebar h2 {
-  color: #005244;
+  color: #FFF;
   font-weight: bold;
   font-size:25px;
   text-align:center;
+  margin:0;
+  padding: 15px 0;
+  background-color:rgba(0,0,0,0.5);
 }
 
 
@@ -106,29 +109,16 @@ body {
 .alignment {
   text-align:center;
   font-size:12px;
-  width: 170px;
-  height: 170px;
   margin: 5px auto;
 }
 
-.alignment_graph {
-  width: 150px;
-  height:150px;
-  background-color: rgba(0,0,0,0.2);
-  margin-top:-20px;
-  margin-left:20px;
-  position:relative;
+.alignment_slider {
+  border-radius:5px;
   user-select: none;
+  margin:10px 0;
+  border-bottom:5px solid rgba(0,0,0,0.2);
+  position:relative;
 }
-.alignment_quadrant {
-  width:37.5px;
-  height:37.5px;
-  box-sizing:border-box;
-}
-.alignment_quadrant:nth_child(odd) {
-  border-right: 1px solid rgba(0,0,0,0.5);
-}
-
 .alignment_selector {
   user-select:none;
   width:20px;
@@ -136,19 +126,20 @@ body {
   border-radius:50%;
   position:absolute;
   margin-left:-10px;
-  margin-top:-10px;
-  top:50%;
+  margin-top:-7.5px;
+  top:0;
   left:50%;
-  background-color:rgba(0,0,0,0.3);
+  background-color:#006957;
   cursor:pointer;
+  transition:all ease 0.3s;
 }
 .alignment_selector:hover {
-  background-color:rgba(0,0,0,0.4);
+  background-color:#00594A;
+  transform:scale(1.1, 1.1);
 }
 
-.alignment_x {
+.alignment_axis {
   display:flex;
-  margin-left: 20px;
   height:20px;
 }
 .alignment_l {
@@ -156,22 +147,6 @@ body {
   text-align:left;
 }
 .alignment_r {
-  flex:1;
-  text-align:right;
-}
-.alignment_y {
-  display:flex;
-  transform: rotate(-90deg);
-  transform-origin: left top 0;
-  width: 150px;
-  margin-top:150px;
-  margin-bottom:-170px;
-}
-.alignment_b {
-  flex:1;
-  text-align:left;
-}
-.alignment_t {
   flex:1;
   text-align:right;
 }
