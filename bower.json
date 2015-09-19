@@ -1,0 +1,23 @@
+{
+  "name": "Electioneering",
+  "version": "0.0.0",
+  "homepage": "https://github.com/pahgawk/Electioneering",
+  "authors": [
+    "Dave Pagurek <dave@davepagurek.com>"
+  ],
+  "moduleType": [
+    "amd"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "directory": "public/components",
+  "dependencies": {
+    "prefixfree": "prefix-free#gh-pages"
+  }
+}
