@@ -22,7 +22,7 @@ function averagify(array){
   })
 }
 
-export class Person {
+export default class Person {
   constructor(data) {
     this.name = data.name;
     this.age = data.age;
@@ -32,6 +32,7 @@ export class Person {
   }
 
   update(parties, importance = 0.5) {
+    // console.log("RUNNING UPDATE");
     var likeness = Array.apply(null, new Array(parties.length)).map(() => {return 0;}); // [-1, 1]
     var max_likeness_per_issue = 1/this.views.length;
 
@@ -57,6 +58,20 @@ export class Person {
       var newAffinity = affinities[index];
       return element + (newAffinity - element)*importance;
     }));
+  }
+
+  vote() {
+    var determiner = Math.random()
+    var partyToVote = 0;
+    this.parties.forEach(function(party, index){
+      determiner -= party;
+      if (determiner <= 0) {
+        return;
+      } else {
+        partyToVote++;
+      }
+    })
+    return partyToVote;
   }
 
 };

@@ -2,8 +2,8 @@ var $ = require("jquery");
 var Alignment = require("./Alignment.js");
 
 export default class Stance {
-  constructor(politician, text, index) {
-    this.politician = politician;
+  constructor(party, text, index) {
+    this.party = party;
     this.index = index;
 
     this.element = $(
@@ -20,6 +20,6 @@ export default class Stance {
   }
 
   setValue(value) {
-    if (value) this.politician.opinions[this.id] = value;
+    if (value) this.party.views[this.id] = value;
   }
 }
