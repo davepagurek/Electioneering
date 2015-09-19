@@ -66,6 +66,25 @@ def image_squares(image)
   squares
 end
 
+def pop_noise(avg)
+  (rand()*(avg/10)).to_i
+end
+
+def allocate_population_prov(squares, pool)
+  cities, rural = squares.partition { |sq| sq[:city] }
+  cities.each {|sq| sq[:pop] = 1_000_000 + pop_noise(1_000_000)}
+  left = pool - (cities.map {|sq| sq[:pop]}.inject(:+) || 0)
+  rural_avg = (left / rural.length).to_i
+  rural.each {|sq| sq[:pop] = [rural_avg + pop_noise(rural_avg),1].max}
+end
+
+def allocate_population(squares)
+  provinces = squares.group_by {|sq| sq[:province][:name]}
+  provinces.each do |pv, sqs|
+    allocate_population_prov(sqs, sqs.first[:province][:pop])
+  end
+end
+
 def transform_squares(squares)
   hash = {}
   squares.each do |sq|
@@ -77,19 +96,30 @@ def transform_squares(squares)
   hash
 end
 
-image = ChunkyPNG::Image.from_file('canada-map-input.png')
+image = ChunkyPNG::Image.from_file('script/canada-map-input.png')
 puts "loaded"
 squares = image_squares(image)
+allocate_population(squares)
 p squares.count
-p squares.count {|s| s[:city] }
+# p squares.count {|s| s[:city] }
+# p squares.max_by {|s| s[:pop]}
+# p squares.min_by {|s| s[:pop]}
 p squares.sample(10)
 transformed_squares = transform_squares(squares)
-File.open("../data/squares.json",'w') do |f|
+File.open("data/squares.json",'w') do |f|
   f.puts JSON.dump(transformed_squares)
 end
 
+def map_colour(pop)
+  # scale = ['#f0f9e8', '#ccebc5', '#a8ddb5', '#7bccc4', '#4eb3d3', '#2b8cbe', '#08589e']
+  # scale[Math.log10(pop).floor]
+  x = [(Math.log10(pop)-2),0.0].max
+  red = ((x/6.2)*250).floor
+  # "rgb(#{red}, 30, #{[0,173-(red)].max})"
+  "rgb(#{red}, 95, 173)"
+end
 
-RECT_SIZE = 12
+RECT_SIZE = 11
 MARGIN = 1
 GRID = RECT_SIZE + MARGIN
 def map_svg(squares, image)
@@ -106,17 +136,19 @@ def map_svg(squares, image)
   builder.svg(attrs) do |b|
     squares.each do |sq|
       b.rect({
+        'class' => ["sq", "sq-prov-#{sq[:province][:name]}", sq[:city] ? "sq-city" : nil].compact.join(' '),
         'x' => sq[:x] * GRID, 'y' => sq[:y] * GRID,
         'width' => RECT_SIZE,'height' => RECT_SIZE,
-        'class' => ["sq", "sq-prov-#{sq[:province][:name]}", sq[:city] ? "sq-city" : nil].compact.join(' '),
         'id' => "x#{sq[:x]}y#{sq[:y]}",
-        'rx' => 3, 'ry' => 3,
+        # 'rx' => 3, 'ry' => 3,
+        # 'style' => "fill: #{map_colour(sq[:pop])};stroke-width:1;stroke:rgba(0,0,0,0.4)"
+        'style' => "fill: #{map_colour(sq[:pop])}"
       })
     end
   end
 end
 
 svg = map_svg(squares, image)
-File.open("../data/map.svg",'w') do |f|
+File.open("data/map.svg",'w') do |f|
   f.puts svg
 end
