@@ -21,8 +21,12 @@ export default class Alignment {
     this.selector = $(this.element).find(".alignment_selector");
     var mouseMove = (event) => {
       event.preventDefault();
-      this.selector.css("left", `${event.pageX - this.selector.parent().offset().left}px`);
-      callback(this.selector.position().left/this.selector.parent().width());
+      var width = this.selector.parent().width();
+      var x = event.pageX - this.selector.parent().offset().left;
+      if (x < 0) x = 0;
+      if (x > width) x = width;
+      this.selector.css("left", `${x}px`);
+      callback(this.selector.position().left/width);
       return false;
     };
     window.addEventListener("mouseup", () => window.removeEventListener('mousemove', mouseMove, true))
