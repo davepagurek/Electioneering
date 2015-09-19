@@ -2,6 +2,7 @@ var _ = require("lodash");
 var $ = require("jquery");
 
 var Stance = require("./ui/Stance.js");
+var Opportunity = require("./ui/Opportunity.js");
 
 var politician = {
   opinions: []
@@ -14,6 +15,20 @@ var stances = [
   "Should Canadian aboriginals receive more government funds?"
 ];
 
-$(function(){
+$(document).ready(function(){
+  var svg = $("svg");
+  $("rect").on("mouseover", function() {
+    svg.append($(this));
+  });
+
   stances.forEach((stance, i) => $("#stances").append(new Stance(politician, stance, i).element));
+
+  //Test thing
+  setTimeout(() => {
+    $("#opportunities").append(new Opportunity(
+      "A factory is shutting down in Southern Ontario, and half the town was laid off.",
+      "Subsidize jobs in the area",
+      () => alert("you pressed a thing")
+    ).element);
+  }, 1000);
 });

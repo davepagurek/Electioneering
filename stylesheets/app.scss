@@ -1,6 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic);
 @import 'colors';
 @import 'alignment';
+@import 'opportunity';
 
 /* Main */
 
@@ -63,7 +64,42 @@ body {
 
 #map {
   flex: 1;
+  box-sizing:border-box;
+  padding:2% 10%;
+  display:flex;
+  position: relative;
   background-color: #79BD8F;
+
+  svg {
+    flex: 1;
+    transition: all ease 0.2s;
+
+    &:hover {
+      rect {
+        opacity:0.8;
+      }
+    }
+
+    rect {
+      border-style:solid;
+      /*position:relative;*/
+      /*z-index: 1;*/
+      stroke-width:0;
+      transition: all ease 0.2s;
+      /*transform-origin:50% 50%;*/
+
+      &:hover {
+        opacity:1;
+        transition: all ease 0.2s;
+        stroke-width:10;
+        /*border-width:5px !important;*/
+        /*transform:scale(1.2, 1.2);*/
+        /*fill: #FFF !important;*/
+        /*z-index:999;*/
+        /*box-shadow: 0 0 50px rgba(0,0,0,255);*/
+      }
+    }
+  }
 }
 
 

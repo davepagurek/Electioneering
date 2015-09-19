@@ -17,6 +17,7 @@
     "tests"
   ],
   "dependencies": {
+    "animate-sass": "~0.6.4",
     "font-awesome": "~4.4.0",
     "jquery": "~2.1.4",
     "jquery-ui": "~1.10",

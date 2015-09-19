@@ -144,7 +144,7 @@ def map_svg(squares, image)
         'id' => "x#{sq[:x]}y#{sq[:y]}",
         # 'rx' => 3, 'ry' => 3,
         # 'style' => "fill: #{map_colour(sq[:pop])};stroke-width:1;stroke:rgba(0,0,0,0.4)"
-        'style' => "fill: #{map_colour(sq[:pop])}"
+        'style' => "fill: #{map_colour(sq[:pop])}; stroke: #{map_colour(sq[:pop])}"
       })
     end
   end
