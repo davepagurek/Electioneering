@@ -67,7 +67,7 @@ def image_squares(image)
 end
 
 def pop_noise(avg)
-  (rand()*(avg/10)).to_i
+  ((rand()-0.5)*(avg/10)).to_i
 end
 
 def allocate_population_prov(squares, pool)
@@ -90,7 +90,8 @@ def transform_squares(squares)
   squares.each do |sq|
     hash["x#{sq[:x]}y#{sq[:y]}"] = {
       "prov" => sq[:province][:name],
-      "city" => sq[:city]
+      "city" => sq[:city],
+      "pop" => sq[:pop]
     }
   end
   hash

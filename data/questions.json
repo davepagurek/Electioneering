@@ -2,6 +2,7 @@
     {
         "question": "Should the federal government require children to be vaccinated for preventable diseases?",
         "category": "healthcare",
+        "power": 0.4,
         "ON": 0.82,
         "BC": 0.74,
         "AB": 0.74,
@@ -15,6 +16,7 @@
     {
         "question": "Should prescription drugs be covered under Canada\u2019s universal healthcare plan?",
         "category": "healthcare",
+        "power": 0.4,
         "ON": 0.81,
         "BC": 0.84,
         "AB": 0.78,
@@ -28,6 +30,7 @@
     {
         "question": "Should marijuana be legalized for recreational use?",
         "category": "healthcare",
+        "power": 0.4,
         "ON": 0.7,
         "BC": 0.77,
         "AB": 0.67,
@@ -41,6 +44,7 @@
     {
         "question": "Should preventative dental care be covered under Canada\u2019s universal healthcare plan?",
         "category": "healthcare",
+        "power": 0.2,
         "ON": 0.84,
         "BC": 0.87,
         "AB": 0.81,
@@ -54,6 +58,7 @@
     {
         "question": "Should the government increase environmental regulations on businesses in Canada?",
         "category": "environment",
+        "power": 0.3,
         "ON": 0.84,
         "BC": 0.87,
         "AB": 0.76,
@@ -67,6 +72,7 @@
     {
         "question": "Should the federal government subsidize the production and consumption of renewable energy sources?",
         "category": "environment",
+        "power": 0.5,
         "ON": 0.8,
         "BC": 0.82,
         "AB": 0.72,
@@ -80,6 +86,7 @@
     {
         "question": "Should Canada allow the logging of old growth forests?",
         "category": "environment",
+        "power": 0.1,
         "ON": 0.34,
         "BC": 0.32,
         "AB": 0.43,
@@ -93,6 +100,7 @@
     {
         "question": "Do you support the Northern Gateway pipeline project?",
         "category": "environment",
+        "power": 0.3,
         "ON": 0.38,
         "BC": 0.32,
         "AB": 0.62,
@@ -106,6 +114,7 @@
     {
         "question": "Should the government allow TransCanada to expropriate private property for the construction of the Keystone pipeline?",
         "category": "environment",
+        "power": 0.1,
         "ON": 0.27,
         "BC": 0.23,
         "AB": 0.45,
@@ -119,6 +128,7 @@
     {
         "question": "Should prisoners serving life sentences for first degree murder be eligible for a parole hearing after 15 years?",
         "category": "criminal",
+        "power": 0.2,
         "ON": 0.34,
         "BC": 0.33,
         "AB": 0.28,
@@ -132,6 +142,7 @@
     {
         "question": "Should the government enact a stricter immigration policy?",
         "category": "immigration",
+        "power": 0.4,
         "ON": 0.57,
         "BC": 0.55,
         "AB": 0.65,
@@ -145,6 +156,7 @@
     {
         "question": "Should the federal government put a cap on university tuition rates?",
         "category": "education",
+        "power": 0.2,
         "ON": 0.83,
         "BC": 0.82,
         "AB": 0.79,
@@ -158,6 +170,7 @@
     {
         "question": "Should postsecondary education be a provincial or federal responsibility?",
         "category": "education",
+        "power": 0.2,
         "ON": 0.62,
         "BC": 0.58,
         "AB": 0.63,
@@ -171,6 +184,7 @@
     {
         "question": "Should the federal government be able to monitor phone calls and emails?",
         "category": "domestic_policy",
+        "power": 0.4,
         "ON": 0.32,
         "BC": 0.3,
         "AB": 0.34,
@@ -184,6 +198,7 @@
     {
         "question": "Should Canadian aboriginals receive more government funds?",
         "category": "domestic_policy",
+        "power": 0.2,
         "ON": 0.36,
         "BC": 0.28,
         "AB": 0.18,
@@ -197,6 +212,7 @@
     {
         "question": "Should Quebec be granted sovereignty from the rest of Canada?",
         "category": "domestic_policy",
+        "power": 0.3,
         "ON": 0.13,
         "BC": 0.16,
         "AB": 0.22,
@@ -210,6 +226,7 @@
     {
         "question": "Should nonviolent drug offenders be given mandatory jail sentences?",
         "category": "domestic_policy",
+        "power": 0.5,
         "ON": 0.16,
         "BC": 0.16,
         "AB": 0.21,
@@ -223,6 +240,7 @@
     {
         "question": "Do you support a national daycare policy?",
         "category": "domestic_policy",
+        "power": 0.5,
         "ON": 0.72,
         "BC": 0.76,
         "AB": 0.68,
@@ -236,6 +254,7 @@
     {
         "question": "Should the federal government invest in urban, commuter rail infrastructure?",
         "category": "domestic_policy",
+        "power": 0.4,
         "ON": 0.83,
         "BC": 0.83,
         "AB": 0.77,
@@ -249,6 +268,7 @@
     {
         "question": "In order to reduce energy costs, should the government nationalize or privatize the energy sector?",
         "category": "domestic_policy",
+        "power": 0.3,
         "ON": 0.36,
         "BC": 0.38,
         "AB": 0.49,
@@ -262,6 +282,7 @@
     {
         "question": "Should the federal government elect or abolish the Senate?",
         "category": "domestic_policy",
+        "power": 0.4,
         "ON": 0.48,
         "BC": 0.49,
         "AB": 0.51,
@@ -275,6 +296,7 @@
     {
         "question": "Should the government allow digital publishers to place locks on their content (MP3s, etc)?",
         "category": "domestic_policy",
+        "power": 0.3,
         "ON": 0.35,
         "BC": 0.34,
         "AB": 0.35,
@@ -288,6 +310,7 @@
     {
         "question": "Should the government reinstate the long form mandatory census?",
         "category": "domestic_policy",
+        "power": 0.2,
         "ON": 0.64,
         "BC": 0.62,
         "AB": 0.53,
@@ -301,6 +324,7 @@
     {
         "question": "Do you support Bill C-51, which expands local police and intelligence agencies\u2019 authority to prevent terrorism?",
         "category": "foreign_policy",
+        "power": 0.5,
         "ON": 0.34,
         "BC": 0.27,
         "AB": 0.41,
@@ -314,6 +338,7 @@
     {
         "question": "Should Canadian soldiers be more involved in Iraq?",
         "category": "foreign_policy",
+        "power": 0.3,
         "ON": 0.12,
         "BC": 0.1,
         "AB": 0.16,
@@ -327,6 +352,7 @@
     {
         "question": "Should Canada increase or decrease foreign aid spending?",
         "category": "foreign_policy",
+        "power": 0.4,
         "ON": 0.36,
         "BC": 0.36,
         "AB": 0.31,
@@ -340,6 +366,7 @@
     {
         "question": "Should Canada increase or decrease military defense spending?",
         "category": "foreign_policy",
+        "power": 0.6,
         "ON": 0.29,
         "BC": 0.26,
         "AB": 0.38,
@@ -353,6 +380,7 @@
     {
         "question": "Should Canada raise or lower the tax rate for corporations?",
         "category": "economic_policy",
+        "power": 0.7,
         "ON": 0.68,
         "BC": 0.73,
         "AB": 0.69,
@@ -366,6 +394,7 @@
     {
         "question": "Should the pensions of retired workers be taxed?",
         "category": "economic_policy",
+        "power": 0.4,
         "ON": 0.22,
         "BC": 0.22,
         "AB": 0.18,
@@ -379,6 +408,7 @@
     {
         "question": "Should the government use economic stimulus to aid the country during times of recession?",
         "category": "economic_policy",
+        "power": 0.6,
         "ON": 0.87,
         "BC": 0.87,
         "AB": 0.84,
@@ -392,6 +422,7 @@
     {
         "question": "Should Canada pursue free trade deals with other countries?",
         "category": "economic_policy",
+        "power": 0.3,
         "ON": 0.8,
         "BC": 0.77,
         "AB": 0.82,
@@ -405,6 +436,7 @@
     {
         "question": "Should employment insurance be given to those who work seasonal jobs including tourism, fishery and farming?",
         "category": "economic_policy",
+        "power": 0.2,
         "ON": 0.75,
         "BC": 0.71,
         "AB": 0.64,
@@ -418,6 +450,7 @@
     {
         "question": "Should the employee contribution rate for the Canadian Pension Plan (CPP) be raised above its current 4.49% rate?",
         "category": "economic_policy",
+        "power": 0.5,
         "ON": 0.34,
         "BC": 0.34,
         "AB": 0.3,
@@ -431,6 +464,7 @@
     {
         "question": "Should corporations, unions, and non-profit organizations be allowed to donate to political parties?",
         "category": "electoral_policy",
+        "power": 0.3,
         "ON": 0.23,
         "BC": 0.23,
         "AB": 0.21,
@@ -444,6 +478,7 @@
     {
         "question": "Should Canada switch to a proportional representation voting system?",
         "category": "electoral_policy",
+        "power": 0.4,
         "ON": 0.58,
         "BC": 0.64,
         "AB": 0.55,
@@ -457,6 +492,7 @@
     {
         "question": "Should terminally ill patients be allowed to end their lives via assisted suicide?",
         "category": "social_issues",
+        "power": 0.3,
         "ON": 0.86,
         "BC": 0.89,
         "AB": 0.85,
@@ -470,6 +506,7 @@
     {
         "question": "Should women be allowed to wear a Niq\u0101b, or face veil, to civic ceremonies?",
         "category": "social_issues",
+        "power": 0.2,
         "ON": 0.58,
         "BC": 0.67,
         "AB": 0.51,
@@ -483,6 +520,7 @@
     {
         "question": "Should the government permit the use of drones for commercial purposes?",
         "category": "etc",
+        "power": 0.1,
         "ON": 0.5,
         "BC": 0.48,
         "AB": 0.49,
