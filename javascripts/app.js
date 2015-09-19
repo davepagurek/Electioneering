@@ -16,21 +16,7 @@ var parties = [
   }
 ];
 
-var people = {
-  // ID of the square to list of people
-  // square ID corresponds to metadata file as well as SVG element ids
-  "x50y90" : [
-    new Person({
-      // may do this in JS on demand, it makes file bigger for little gain
-      "name" : "Bob Jepsen",
-      "age": 32,
-      // corresponds with order in questions file
-      "views": [0.2,0.9,-0.8,-0.1,0.8,0.4],
-      // corresponds with the order in parties file, normalized to sum to 1
-      "parties": [0.2,0.6,0.2]
-    }),
-  ]
-};
+var people = {};
 
 var politician = {
   name: "David Hasselhoff",
@@ -113,25 +99,6 @@ $(document).ready(function(){
 
 });
 
-var people = [{
-      // may do this in JS on demand, it makes file bigger for little gain
-      "name" : "Bob Jepsen",
-      "age": 32,
-      // corresponds with order in questions file
-      "views": [0.2,0.9,-0.8,-0.1,0.8,0.4],
-      // corresponds with the order in parties file
-      "parties": [0.3,0.4,0.2,0.1]
-    }, {
-      // may do this in JS on demand, it makes file bigger for little gain
-      "name" : "Bob Jepsen",
-      "age": 32,
-      // corresponds with order in questions file
-      "views": [0.2,0.9,-0.8,-0.1,0.8,0.4],
-      // corresponds with the order in parties file
-      "parties": [0.3,0.4,0.2,0.1]
-    }
-];
-
 // 62 x 48
 
 var randSquare = function() {
@@ -146,13 +113,25 @@ var randSquare = function() {
 
 var getPoll = function() {
     var poll = {};
+    var r;
+
+    // Poll question
+    // * Party affinity
+    // * Specfic question (out of 38)
+    r = Math.random();
+    if (r < 0.2) {
+        poll.type = "party";
+    } else {
+        poll.type = "question";
+        poll.question = Math.floor(38 * Math.random());
+    }
 
     // Poll methods:
-    // * Phone // Biased age 18..*
-    // * Online // Biased age 12..30
-    // * Door to door // Biased 25..*
-    // * Mail // Biased 50..*
-    var r = Math.random();
+    // * Phone // Biased age 18..90
+    // * Online // Biased age 12..40
+    // * Door to door // Biased 25..90
+    // * Mail // Biased 50..90
+    r = Math.random();
     if (r < 0.25) {
         poll.method = "Phone";
     } else if (r < 0.5) {
@@ -162,6 +141,4 @@ var getPoll = function() {
     } else {
         poll.method = "Mail";
     }
-
-
 }
