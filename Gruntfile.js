@@ -22,6 +22,10 @@ module.exports = function(grunt) {
       ruby: {
         files: ['server.rb'],
         tasks: ['runserver']
+      },
+      map: {
+        files: ['script/mapgen.rb'],
+        tasks: ['genmap']
       }
     },
 
@@ -61,6 +65,14 @@ module.exports = function(grunt) {
       opts: {stdio: 'inherit'},
     })
 
+  });
+
+  grunt.registerTask('genmap', 'Generate a new map', function() {
+    grunt.util.spawn({
+      cmd: "ruby",
+      args: ['script/mapgen.rb'],
+      opts: {stdio: 'inherit'},
+    })
   });
 
   process.on('exit', function(){
