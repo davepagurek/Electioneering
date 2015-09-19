@@ -17,6 +17,9 @@
     "tests"
   ],
   "dependencies": {
+    "font-awesome": "~4.4.0",
+    "jquery": "~2.1.4",
+    "lodash": "~3.10.1",
     "prefixfree": "prefix-free#gh-pages"
   }
 }
