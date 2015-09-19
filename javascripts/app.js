@@ -33,13 +33,24 @@ var people = {
   ]
 };
 
+function loadData() {
+  $.getJSON( "data/people.json", function( data ) {
+    people = _.mapValues(data, function(p) {
+      return new Person(p);
+    });
+  });
+  $.getJSON( "data/questions.json", function( data ) {
+    data.forEach((stance, i) => $("#stances").append(new Stance(politician, stance.question, i).element));
+  });
+}
+
 $(document).ready(function(){
   var svg = $("svg");
   $("rect").on("mouseover", function() {
     svg.append($(this));
   });
 
-  stances.forEach((stance, i) => $("#stances").append(new Stance(politician, stance, i).element));
+  loadData();
 
   setInterval(() => {
     let riding = _.sample(document.getElementsByClassName("sq"));
