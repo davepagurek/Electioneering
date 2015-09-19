@@ -16,7 +16,6 @@
     "test",
     "tests"
   ],
-  "directory": "public/components",
   "dependencies": {
     "prefixfree": "prefix-free#gh-pages"
   }
