@@ -15,21 +15,8 @@ var parties = [
   }
 ];
 
-var people = {
-  // ID of the square to list of people
-  // square ID corresponds to metadata file as well as SVG element ids
-  "x50y90" : [
-    new Person({
-      // may do this in JS on demand, it makes file bigger for little gain
-      "name" : "Bob Jepsen",
-      "age": 32,
-      // corresponds with order in questions file
-      "views": [0.2,0.9,-0.8,-0.1,0.8,0.4],
-      // corresponds with the order in parties file, normalized to sum to 1
-      "parties": [0.2,0.6,0.2]
-    }),
-  ]
-};
+var people = {};
+var squares = {};
 
 var politician = {
   name: "David Hasselhoff",
@@ -63,6 +50,9 @@ function loadData() {
   $.getJSON( "data/questions.json", function( data ) {
     stances = data;
   });
+  $.getJSON( "data/squares.json", function( data ) {
+      squares = data;
+  });
 }
 
 $(document).ready(function(){
@@ -72,6 +62,14 @@ $(document).ready(function(){
     politician.name = name;
     politician.party = _.find(parties, function(p) {
       return p.name.toLowerCase() == party;
+    });
+
+    tweets = tweets.map(function(tweet) {
+      var newTweet = tweet.tweet.replace(/obama[\w]*/ig, politician.name);
+      return {
+        tweet: newTweet,
+        positivity: tweet.positivity
+      }
     });
 
     $("rect").on("click", function() {
@@ -100,7 +98,7 @@ $(document).ready(function(){
         _.sample(tweets).tweet,
         riding.id
       ).element);
-    }, 5000);
+    }, 11000);
 
     //Test thing
     setInterval(() => {
@@ -111,3 +109,100 @@ $(document).ready(function(){
 
 
 });
+
+var genCompany = function() {
+    var a = ["The ", "Bob's ", "Amalgamated ", "Super ", "Terrestrial ", ""];
+    var b = ["Hammer ", "Plier ", "Screwdriver ", "Combination Mill/Drill ", "Compound Radial Arm Saw ", "Free Software "];
+    var c = ["Company", "Inc.", "LLC", "Limited", "Coop", "Empire", "Emporium"];
+    return a[Math.floor(Math.random() * a.length)] + b[Math.floor(Math.random() * b.length)] + c[Math.floor(Math.random() * c.length)];
+};
+
+var getPoll = function() {
+    var randSquare = function() {
+        var x = Math.floor(Math.random() * 63);
+        var y = Math.floor(Math.random() * 49);
+        var sq = "x" + x + "y" + y;
+        if (sq in squares) {
+            return sq;
+        }
+        return randSquare();
+    }
+
+    var poll = {};
+    poll.company = genCompany();
+    var r;
+
+    // Location
+    poll.square = randSquare();
+    var p = people[poll.square];
+    var ppl = [];
+
+    // Number of samples
+    poll.n = 50000 + Math.floor(50000 * Math.random());
+
+    // Poll methods:
+    // * Phone // Biased age 18..90
+    // * Online // Biased age 12..40
+    // * Door to door // Biased 25..90
+    // * Mail // Biased 50..90
+    r = Math.random();
+    if (r < 0.25) {
+        poll.method = "Phone";
+        poll.minAge = 18;
+        poll.maxAge = 90;
+    } else if (r < 0.5) {
+        poll.method = "Online";
+        poll.minAge = 12;
+        poll.maxAge = 40;
+    } else if (r < 0.75) {
+        poll.method = "Door to door";
+        poll.minAge = 25;
+        poll.maxAge = 90;
+    } else {
+        poll.method = "Mail";
+        poll.minAge = 50;
+        poll.maxAge = 90;
+    }
+
+    for (var i = 0; i < p.length; i++) {
+        if (poll.minAge <= p[i].age && p[i].age <= poll.maxAge) {
+            ppl.push(p[i])
+        }
+    }
+
+    if (ppl.length == 0) {
+        return getPoll();
+    }
+
+    // Poll question
+    // * Party affinity
+    // * Specfic question (out of 38)
+    r = Math.random();
+    if (r < 0.2) {
+        poll.type = "party";
+        poll.parties = [0.0, 0.0, 0.0];
+        for (var i = 0; i < poll.n; i++) {
+            poll.parties[ppl[Math.floor(ppl.length * Math.random())].pollVote()]++;
+        }
+    } else {
+        poll.type = "question";
+        poll.question = Math.floor(38 * Math.random());
+        poll.answer = 0.0;
+        for (var i = 0; i < poll.n; i++) {
+            if (ppl[Math.floor(ppl.length * Math.random())].views[poll.question] > 0) {
+                poll.answer += 1.0;
+            }
+        }
+    }
+    return poll;
+};
+
+//Test thing
+setInterval(() => {
+    var poll = getPoll();
+    if (!poll) {
+        return;
+    }
+    $("#opportunities").append(
+            (new Opportunity(poll.company + " has conducted a poll.", "View Results")).element);
+}, 5000);

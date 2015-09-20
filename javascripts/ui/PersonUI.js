@@ -7,10 +7,13 @@ export default class PersonUI {
   constructor(person){
     this.person = person;
     this.element = $(`
-        <div class="animated bounceIn">
+        <div class="tweet animated bounceIn">
           <div class="person-name">${this.getName()}</div>
           <div class="person-age">${person.age}</div>
           <div class="person-party">Leans ${this.getParty()}</div>
+           <button class="close">
+             <i class="fa fa-times"></i>
+           </button>
         </div>
       `);
     this.setTimer();

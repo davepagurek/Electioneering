@@ -35,7 +35,7 @@ export default class Tweet {
   setTimer() {
     this.timer = setTimeout(() => {
       this.remove();
-    }, 5000);
+    }, 15000);
   }
 
   remove() {
