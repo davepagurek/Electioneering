@@ -24,6 +24,7 @@ var politician = {
 };
 
 var stances = null;
+var squares = null;
 
 function onChallengeAccepted() {
   // this = opportunity
@@ -32,6 +33,19 @@ function onChallengeAccepted() {
     var filter = this.filter.apply(this, [location]);
     _.filter(persons, filter).forEach((person) => person.update(parties));
   }.bind(this));
+}
+
+function runElection() {
+  var results = Array.apply(null, new Array(parties.length)).map(() => {return 0;});
+  _.forOwn(people, function(peeps, squareId) {
+    var realWorldPop = squares[squareId]['pop'];
+    var mult = realWorldPop / peeps.length;
+    peeps.forEach((person) => {
+      var vote = person.vote()
+      results[vote] += mult;
+    });
+  });
+  return _.map(results,Math.floor);
 }
 
 function loadData() {
@@ -45,6 +59,8 @@ function loadData() {
           return p;
         });
       });
+      // window.people = people;
+      // window.peeps = _.flatten(_.values(people));
     });
   });
   $.getJSON( "data/questions.json", function( data ) {
@@ -53,10 +69,14 @@ function loadData() {
   $.getJSON( "data/squares.json", function( data ) {
       squares = data;
   });
+  $.getJSON( "data/squares.json", function( data ) {
+    squares = data;
+  });
 }
 
 $(document).ready(function(){
   loadData();
+  window.runElection = runElection;
 
   $("#game").append(new Start((party, name) => {
     politician.name = name;
