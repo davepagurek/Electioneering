@@ -138,27 +138,23 @@ $(document).ready(function(){
                     $("#modal-container").empty();
                     $("#modal-container").append(new Modal(poll.company + " poll", pollResult(poll)).element);
                     $("#modal-container .modal").modal("show");
-                })).element);
-
-                //(new Opportunity(poll.company + " has conducted " + poll.type + ".", "View Results", function() { viewPoll(poll); })).element);
-    }, 10000);
-
-    setInterval(() => {
-        var poll = getPoll();
-        if (!poll) {
-            return;
-        }
-        $("#opportunities").append(
-                (new Opportunity(poll.company + " has conducted a poll.", "View Results", ()=>{
-                    $("#modal-container").empty();
-                    $("#modal-container").append(new Modal(poll.company + " poll", pollResult(poll)).element);
-                    $("#modal-container .modal").modal("show");
                     drawCharts(poll, $("#modal-container .modal"));
                     viewPoll(poll);
                 })).element);
 
                 //(new Opportunity(poll.company + " has conducted " + poll.type + ".", "View Results", function() { viewPoll(poll); })).element);
-    }, 5000);
+    }, 10000);
+
+    let callElectionButton = $(`<button class="btn btn-primary btn-lg">Call Election</button>`);
+    $("#map").append("<br>")
+    $("#map").append(callElectionButton);
+    callElectionButton.click(() => {
+      var electionResults = runElection();
+      $("#modal-container").empty();
+      $("#modal-container").append(new Modal("Federal Election Results", "<div id=\"chart_div\"></div>").element);
+      $("#modal-container .modal").modal("show");
+      drawCharts(electionResults, $("#modal-container .modal"));
+    })
 
   }).element);
 
@@ -283,18 +279,20 @@ function pollResult(poll){
 
 function drawCharts(poll, modal) {
   var chart_div = modal.find("#chart_div").get(0);
-  if (poll.type == "party"){
+  if (poll.constructor === Array || poll.type == "party"){
     // Create the data table.
     var data = new google.visualization.DataTable();
     data.addColumn('string', 'Party');
     data.addColumn('number', 'Support');
+
+    var results = poll.parties || poll;
     data.addRows([
-      ['Liberal', poll.parties[0]],
-      ['NDP', poll.parties[1]],
-      ['Conservative', poll.parties[2]],
+      ['Liberal', results[0]],
+      ['NDP', results[1]],
+      ['Conservative', results[2]],
     ]);
 
-    var options = {'title':'Poll results - By Party',
+    var options = {'title':'Results - By Party',
                      'width':400,
                      'height':300,
                     'colors': ['red', 'orange', 'blue']};
