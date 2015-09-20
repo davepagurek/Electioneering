@@ -20,9 +20,22 @@ export default class Opportunity {
       callback.apply(this);
       this.remove();
     });
+    this.element.on("mouseleave", () => {
+      this.setTimer();
+    });
+    this.element.on("mouseover", () => {
+      clearTimeout(this.timer);
+    });
+    this.setTimer();
     this.element.find("h3").text(question);
     this.importance = importance;
     this.squares = squares;
+  }
+
+  setTimer() {
+    this.timer = setTimeout(() => {
+      this.remove();
+    }, 10000);
   }
 
   remove() {

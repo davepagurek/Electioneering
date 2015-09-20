@@ -66,7 +66,7 @@ $(document).ready(function(){
   setInterval(() => {
     let riding = _.sample(document.getElementsByClassName("sq"));
     svg.append($(riding));
-    $("#game").append(new Tweet(
+    $("#opportunities").append(new Tweet(
       _.sample(tweets).tweet,
       riding.id
     ).element);
@@ -75,6 +75,5 @@ $(document).ready(function(){
   //Test thing
   setInterval(() => {
     $("#opportunities").append(Opportunity.generateOpportunity(onChallengeAccepted).element);
-  }, 20000); 
-
+  }, 20000);
 });

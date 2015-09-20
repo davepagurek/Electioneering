@@ -1,24 +1,37 @@
 #opportunities {
-  position:absolute;
-  right:0;
-  bottom:0;
   width:250px;
-  background-color:$medium;
+  background-color: $medium_dark;
+  overflow-y:auto;
+  overflow-x:hidden;
+
+  h2 {
+      color: $bright;
+      font-weight: bold;
+      font-size:25px;
+      text-align:center;
+      margin:0;
+      padding: 15px 0;
+      background-color:rgba(0,0,0,0.5);
+    }
+}
+
+.opportunity {
+  padding:30px 10px 10px 10px;
+  overflow:hidden;
+  position: relative;
+  background-color: rgba(0,0,0,0.05);
+  color: $dark;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
   -webkit-animation-duration: .75s;
   animation-duration: .75s;
-    -webkit-animation-name: slideInRight;
+  -webkit-animation-name: slideInRight;
   animation-name: slideInRight;
-}
+  transition: background 1s ease;
 
-.opportunity {
-  margin:10px;
-  padding:30px 10px 10px 10px;
-  background-color:$normal;
-  overflow:hidden;
-  position: relative;
-  color: $dark;
+  &:nth-child(even) {
+    background-color:rgba(0,0,0,0.15);
+  }
 
   h3 {
     font-size: 15px;

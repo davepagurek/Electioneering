@@ -1,20 +1,35 @@
 .tweet {
-  position:absolute;
   font-size: 13px;
-  width: 280px;
-  display:flex;
   flex-direction:row;
   padding:10px;
-  background-color:$light;
+  box-sizing: border-box;
+  background-color:rgba(0,0,0,0.05);
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-duration: .75s;
+  animation-duration: .75s;
+  -webkit-animation-name: slideInRight;
+  animation-name: slideInRight;
+  overflow:hidden;
+  transition: background 1s ease;
+
+  &:nth-child(even) {
+    background-color:rgba(0,0,0,0.15);
+  }
 
   .tweet_photo {
     width: 50px;
     height:50px;
-    margin-right:10px;
-    background-color:#333;
+    line-height:50px;
+    font-size:30px;
+    text-align:center;
+    margin-bottom:10px;
+    background-color:#47D6C3;
+    color:#FFF;
   }
 
   .tweet_text {
+    color:$dark;
     flex:1;
     margin-right:40px;
   }

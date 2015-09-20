@@ -121,15 +121,15 @@ body {
   background-color: $medium_dark;
   overflow-x: auto;
 
-    h2 {
-      color: $bright;
-      font-weight: bold;
-      font-size:25px;
-      text-align:center;
-      margin:0;
-      padding: 15px 0;
-      background-color:rgba(0,0,0,0.5);
-    }
+  h2 {
+    color: $bright;
+    font-weight: bold;
+    font-size:25px;
+    text-align:center;
+    margin:0;
+    padding: 15px 0;
+    background-color:rgba(0,0,0,0.5);
+  }
 }
 
 /* Stance */
