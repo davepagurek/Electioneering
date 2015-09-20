@@ -79,4 +79,9 @@ export default class Person {
     return partyToVote;
   }
 
+  vote() {
+    var maxAffinity = _.max(this.parties);
+    return this.parties.indexOf(maxAffinity);
+  }
+
 };
