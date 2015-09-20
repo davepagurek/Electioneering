@@ -168,10 +168,10 @@ $(document).ready(function(){
                     $("#modal-container").append(new Modal(poll.company + " poll", pollResult(poll)).element);
                     $("#modal-container .modal").modal("show");
                     drawCharts(poll, $("#modal-container .modal"));
-                    viewPoll(poll);
+                    highlightForPoll(poll);
                 })).element);
 
-                //(new Opportunity(poll.company + " has conducted " + poll.type + ".", "View Results", function() { viewPoll(poll); })).element);
+                //(new Opportunity(poll.company + " has conducted " + poll.type + ".", "View Results", function() { highlightForPoll(poll); })).element);
     }, 10000);
 
     let callElectionButton = $(`<button class="btn btn-primary btn-lg">Call Election</button>`);
@@ -350,12 +350,10 @@ function drawCharts(poll, modal) {
   }
 }
 
-function viewPoll(poll) {
+function highlightForPoll(poll) {
     var k = $("#" + poll.square)[0];
     k.classList.add("highlight");
     setTimeout(() => {
         k.classList.remove("highlight");
     }, 10000);
-    console.log(k);
-    console.log(poll);
 };

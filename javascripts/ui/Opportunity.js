@@ -22,10 +22,21 @@ export default class Opportunity {
     });
     this.element.on("mouseleave", () => {
       this.setTimer();
+      Array.from($("rect")).forEach(function(rect){
+        rect.classList.remove("highlight");
+      })
     });
     this.element.on("mouseover", () => {
       clearTimeout(this.timer);
+
+      if (squares && squares.constructor === Array) {
+        squares.forEach(function(square){
+          var k = $("#" + square)[0];
+          k.classList.add("highlight");
+        })
+      }
     });
+      
     this.setTimer();
     this.element.find("h3").text(question);
     this.importance = importance;
