@@ -1,7 +1,7 @@
 var $ = require("jquery");
 
 export default class Alignment {
-  constructor(left, right, callback = function(){}) {
+  constructor(left, right, value, callback = function(){}) {
     this.element = $(
       `
       <div class="alignment">
@@ -31,5 +31,9 @@ export default class Alignment {
     };
     window.addEventListener("mouseup", () => window.removeEventListener('mousemove', mouseMove, true))
     this.selector.on("mousedown", () => window.addEventListener('mousemove', mouseMove, true))
+
+    var startX = ((value + 1)/2) * 200;
+    console.log(startX);
+    this.selector.css("left", `${startX}px`);
   }
 }

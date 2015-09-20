@@ -6,7 +6,11 @@ var Stance = require("./ui/Stance.js");
 var Opportunity = require("./ui/Opportunity.js");
 var Person = require("./models/Person");
 var Tweet = require("./ui/Tweet.js");
+<<<<<<< HEAD
 var PersonUI = require("./ui/PersonUI.js");
+=======
+var Start = require("./ui/Start.js");
+>>>>>>> Add party selector
 
 var parties = [
   {
@@ -29,6 +33,13 @@ var people = {
     }),
   ]
 };
+
+var politician = {
+  name: "David Hasselhoff",
+  party: 0
+};
+
+var stances = null;
 
 function onChallengeAccepted() {
   // this = opportunity
@@ -53,37 +64,53 @@ function loadData() {
     });
   });
   $.getJSON( "data/questions.json", function( data ) {
-    data.forEach((stance, i) => $("#stances").append(new Stance(parties[0], stance.question, i).element));
+    stances = data;
   });
 }
 
 $(document).ready(function(){
-  var svg = $("svg");
-  $("rect").on("mouseover", function() {
-    svg.append($(this));
-  });
-
-  $("rect").on("click", function() {
-    var peopleList = people[$(this).attr("id")]
-    var person = peopleList[Math.floor(Math.random()*peopleList.length)]
-    var personUI = new PersonUI(person)
-
-    $("#opportunities").append(personUI.element);
-  })
-
   loadData();
 
-  setInterval(() => {
-    let riding = _.sample(document.getElementsByClassName("sq"));
-    svg.append($(riding));
-    $("#opportunities").append(new Tweet(
-      _.sample(tweets).tweet,
-      riding.id
-    ).element);
-  }, 5000);
+  $("#game").append(new Start((party, name) => {
+    politician.name = name;
+    politician.party = _.find(parties, function(p) {
+      return p.name.toLowerCase() == party;
+    });
 
-  //Test thing
-  setInterval(() => {
-    $("#opportunities").append(Opportunity.generateOpportunity(onChallengeAccepted).element);
-  }, 20000);
+    $("rect").on("click", function() {
+      var peopleList = people[$(this).attr("id")]
+      var person = peopleList[Math.floor(Math.random()*peopleList.length)]
+      var personUI = new PersonUI(person)
+
+      $("#opportunities").append(personUI.element);
+    })
+    stances.forEach((stance, i) => $("#stances").append(new Stance(politician.party, stance.question, i).element));
+
+    var svg = $("svg");
+    $("rect").on("mouseover", function() {
+      svg.append($(this));
+    });
+
+    // $("rect").on("click", function() {
+    //   alert("You clicked a riding with " + people[$(this).attr("id")].length + " people.");
+    // })
+
+
+    setInterval(() => {
+      let riding = _.sample(document.getElementsByClassName("sq"));
+      svg.append($(riding));
+      $("#opportunities").append(new Tweet(
+        _.sample(tweets).tweet,
+        riding.id
+      ).element);
+    }, 5000);
+
+    //Test thing
+    setInterval(() => {
+      $("#opportunities").append(Opportunity.generateOpportunity(onChallengeAccepted).element);
+    }, 20000);
+
+  }).element);
+
+
 });

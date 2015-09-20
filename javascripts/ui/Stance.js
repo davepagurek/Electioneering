@@ -15,11 +15,11 @@ export default class Stance {
     );
     this.element.find("h3").text(text);
     this.element.append(
-      new Alignment("Disagree", "Agree").element
+      new Alignment("Disagree", "Agree", this.party.views[this.index]).element
     );
   }
 
   setValue(value) {
-    if (value) this.party.views[this.id] = value;
+    if (value) this.party.views[this.index] = value;
   }
 }
