@@ -28,6 +28,10 @@ export default class Tweet {
     });
     this.element.on("mouseleave", () => {
       this.setTimer();
+        $("#" + riding)[0].classList.remove("highlight");
+    });
+    this.element.on("mouseover", () => {
+        $("#" + riding)[0].classList.add("highlight");
     });
     this.setTimer();
   }
