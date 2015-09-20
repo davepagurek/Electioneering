@@ -156,6 +156,9 @@ var getPoll = function() {
     // Location
     poll.square = randSquare();
     var p = people[poll.square];
+    if (p.length < 4) {
+        return getPoll();
+    }
     var ppl = [];
 
     // Number of samples
