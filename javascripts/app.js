@@ -124,10 +124,24 @@ $(document).ready(function(){
       ).element);
     }, 11000);
 
-    //Test thing
     setInterval(() => {
       $("#opportunities").append(Opportunity.generateOpportunity(onChallengeAccepted).element);
-    }, 20000);
+    }, 10000);
+
+    setInterval(() => {
+        var poll = getPoll();
+        if (!poll) {
+            return;
+        }
+        $("#opportunities").append(
+                (new Opportunity(poll.company + " has conducted a poll.", "View Results", ()=>{
+                    $("#modal-container").empty();
+                    $("#modal-container").append(new Modal(poll.company + " poll", pollResult(poll)).element);
+                    $("#modal-container .modal").modal("show");
+                })).element);
+
+                //(new Opportunity(poll.company + " has conducted " + poll.type + ".", "View Results", function() { viewPoll(poll); })).element);
+    }, 10000);
 
     setInterval(() => {
         var poll = getPoll();
@@ -176,6 +190,9 @@ function getPoll() {
     // Location
     poll.square = randSquare();
     var p = people[poll.square];
+    if (p.length < 4) {
+        return getPoll();
+    }
     var ppl = [];
 
     // Number of samples
@@ -315,6 +332,3 @@ function viewPoll(poll) {
     console.log(k);
     console.log(poll);
 };
-
-//Test thing
-
