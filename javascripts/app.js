@@ -1,7 +1,6 @@
 var _ = require("lodash");
 var $ = require("jquery");
 var tweets = require("./tweets.js");
-var squares = require("../data/squares");
 
 var Stance = require("./ui/Stance.js");
 var Opportunity = require("./ui/Opportunity.js");
@@ -17,6 +16,7 @@ var parties = [
 ];
 
 var people = {};
+var squares = {};
 
 var politician = {
   name: "David Hasselhoff",
@@ -49,6 +49,9 @@ function loadData() {
   });
   $.getJSON( "data/questions.json", function( data ) {
     stances = data;
+  });
+  $.getJSON( "data/squares.json", function( data ) {
+      squares = data;
   });
 }
 
@@ -99,26 +102,32 @@ $(document).ready(function(){
 
 });
 
-// 62 x 48
-
-var randSquare = function() {
-    var x = Math.floor(Math.random() * 63);
-    var y = Math.floor(Math.random() * 49);
-    var sq = "x" + x + "y" + y;
-    if (sq in squares) {
-        return sq;
-    }
-    return randSquare();
-}
+var genCompany = function() {
+    var a = ["The ", "Bob's ", "Amalgamated ", "Super ", "Terrestrial ", ""];
+    var b = ["Hammer ", "Plier ", "Screwdriver ", "Combination Mill/Drill ", "Compound Radial Arm Saw ", "Free Software "];
+    var c = ["Company", "Inc.", "LLC", "Limited", "Coop", "Empire", "Emporium"];
+    return a[Math.floor(Math.random() * a.length)] + b[Math.floor(Math.random() * b.length)] + c[Math.floor(Math.random() * c.length)];
+};
 
 var getPoll = function() {
+    var randSquare = function() {
+        var x = Math.floor(Math.random() * 63);
+        var y = Math.floor(Math.random() * 49);
+        var sq = "x" + x + "y" + y;
+        if (sq in squares) {
+            return sq;
+        }
+        return randSquare();
+    }
+
     var poll = {};
+    poll.company = genCompany();
     var r;
 
     // Location
     poll.square = randSquare();
-    var p = squares[poll.square];
-    var people = [];
+    var p = people[poll.square];
+    var ppl = [];
 
     // Number of samples
     poll.n = 50000 + Math.floor(50000 * Math.random());
@@ -149,12 +158,12 @@ var getPoll = function() {
 
     for (var i = 0; i < p.length; i++) {
         if (poll.minAge <= p[i].age && p[i].age <= poll.maxAge) {
-            people.append(p[i])
+            ppl.push(p[i])
         }
     }
-    
-    if (people.length == 0) {
-        return null;
+
+    if (ppl.length == 0) {
+        return getPoll();
     }
 
     // Poll question
@@ -165,17 +174,27 @@ var getPoll = function() {
         poll.type = "party";
         poll.parties = [0.0, 0.0, 0.0];
         for (var i = 0; i < poll.n; i++) {
-            poll.parties[people[Math.floor(people.length() * Math.random())].pollVote()]++;
+            poll.parties[ppl[Math.floor(ppl.length * Math.random())].pollVote()]++;
         }
     } else {
         poll.type = "question";
         poll.question = Math.floor(38 * Math.random());
         poll.answer = 0.0;
         for (var i = 0; i < poll.n; i++) {
-            if (people[Math.floor(people.length() * Math.random())].views[poll.question] > 0) {
+            if (ppl[Math.floor(ppl.length * Math.random())].views[poll.question] > 0) {
                 poll.answer += 1.0;
-           }
+            }
         }
     }
     return poll;
-}
+};
+
+//Test thing
+setInterval(() => {
+    var poll = getPoll();
+    if (!poll) {
+        return;
+    }
+    $("#opportunities").append(
+            (new Opportunity(poll.company + " has conducted a poll.", "View Results")).element);
+}, 5000);
