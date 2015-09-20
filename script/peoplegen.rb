@@ -20,7 +20,7 @@ def genperson(province, is_city)
 
   base_views = QUESTIONS.map do |q|
     yes = rand() < q[stat_prov]
-    strength = fuzz(q['power'])
+    strength = [0.0, [1.0, fuzz(q['power'])].min].max
     ((yes ? 1 : -1) * strength).round(2)
   end
   # seniors are less common, everyone else is even
@@ -30,11 +30,11 @@ def genperson(province, is_city)
     rand(20..64)
   end
   # Conservative bias with age
-  con_bias = CONSERVATIVE.map {|x| x * (2.3/70.0) * (age-20)}
-  city_bias_factor = is_city ? 0.6 : 0.0
+  con_bias = CONSERVATIVE.map {|x| x * (0.75/70.0) * (age-20)}
+  city_bias_factor = is_city ? 0.35 : 0.0
   lib_bias = LIBERAL.map {|x| x * city_bias_factor}
   views = [base_views, con_bias, lib_bias].transpose.map {|x| x.reduce(:+)}
-  person['views'] = views.map {|x| [0.0, [1.0, x].min].max.round(2) }
+  person['views'] = views.map {|x| [-1.0, [1.0, x].min].max.round(2) }
 
   person
 end
