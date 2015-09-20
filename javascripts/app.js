@@ -114,9 +114,21 @@ $(document).ready(function(){
 
     setInterval(() => {
       let riding = _.sample(document.getElementsByClassName("sq"));
+      var ppl = people[riding.id];
+      var person = ppl[Math.floor(ppl.length * Math.random())];
+      var pick = function(k) {
+          var t = _.sample(tweets);
+          if ((t.positivity >= 0.5 && k) ||
+                  (t.positivity < 0.5 && !k)) {
+              return t;
+          } else {
+              return pick(k);
+          }
+      }
+      var p = pick(person.pollVote() == politician.party);
       svg.append($(riding));
       $("#opportunities").append(new Tweet(
-        _.sample(tweets).tweet,
+        p.tweet,
         riding.id
       ).element);
     }, 11000);
