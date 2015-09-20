@@ -8,6 +8,7 @@ var Person = require("./models/Person");
 var Tweet = require("./ui/Tweet.js");
 var PersonUI = require("./ui/PersonUI.js");
 var Start = require("./ui/Start.js");
+var Modal = require("./ui/Modal.js");
 
 var parties = [
   {
@@ -186,7 +187,7 @@ var getPoll = function() {
         }
     } else {
         poll.type = "question";
-        poll.question = Math.floor(38 * Math.random());
+        poll.question = Math.floor(stances.length * Math.random());
         poll.answer = 0.0;
         for (var i = 0; i < poll.n; i++) {
             if (ppl[Math.floor(ppl.length * Math.random())].views[poll.question] > 0) {
@@ -197,6 +198,17 @@ var getPoll = function() {
     return poll;
 };
 
+function pollResult(poll){
+  if (poll.type == "party"){
+    return `Liberal: ${poll.parties[0]}
+    NDP: ${poll.parties[1]}
+    Conservative: ${poll.parties[2]}`;
+  } else {
+    return `Question: ${stances[poll.question].question}
+     Approve: ${poll.answer} (${((poll.answer/poll.n)*100).toFixed(2)}%)`;
+  }
+}
+
 //Test thing
 setInterval(() => {
     var poll = getPoll();
@@ -204,5 +216,9 @@ setInterval(() => {
         return;
     }
     $("#opportunities").append(
-            (new Opportunity(poll.company + " has conducted a poll.", "View Results")).element);
+            (new Opportunity(poll.company + " has conducted a poll.", "View Results", ()=>{
+                $("#modal-container").empty();
+                $("#modal-container").append(new Modal(poll.company + " poll", pollResult(poll)).element);
+                $("#modal-container .modal").modal("show");
+            })).element);
 }, 5000);
