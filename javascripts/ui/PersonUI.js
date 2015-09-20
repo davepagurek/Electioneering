@@ -7,12 +7,29 @@ export default class PersonUI {
   constructor(person){
     this.person = person;
     this.element = $(`
-        <div>
+        <div class="animated bounceIn">
           <div class="person-name">${this.getName()}</div>
           <div class="person-age">${person.age}</div>
           <div class="person-party">Leans ${this.getParty()}</div>
         </div>
       `);
+    this.setTimer();
+  }
+
+  setTimer() {
+    this.timer = setTimeout(() => {
+      this.remove();
+    }, 10000);
+  }
+
+  remove() {
+    this.element.stop().animate({
+      "height": "0px",
+      "margin-top": "0px",
+      "margin-bottom": "0px",
+      "padding-top": "0px",
+      "padding-bottom": "0px"
+    }, 400, () => this.element.remove());
   }
 
   getParty(){
