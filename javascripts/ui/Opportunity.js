@@ -93,6 +93,7 @@ export default class Opportunity {
 
     opportunities.push({
       name: "Your volunteers are throwing community dinners in seat-rich Toronto suburbs. Go for it?",
+      squares: rallyLocations[0].squares,
       importance: 0.2
     });
 

@@ -7,5 +7,9 @@ module.exports = {
     } else if (elseCallback) {
       elseCallback();
     }
+  },
+
+  randomPick: function(array){
+    return array[Math.floor(array.length*Math.random())];
   }
 };

@@ -6,6 +6,7 @@ var Stance = require("./ui/Stance.js");
 var Opportunity = require("./ui/Opportunity.js");
 var Person = require("./models/Person");
 var Tweet = require("./ui/Tweet.js");
+var PersonUI = require("./ui/PersonUI.js");
 
 var parties = [
   {
@@ -48,8 +49,8 @@ function loadData() {
           p.update(parties, 1.0)
           return p;
         });
+      });
     });
-  });
   });
   $.getJSON( "data/questions.json", function( data ) {
     data.forEach((stance, i) => $("#stances").append(new Stance(parties[0], stance.question, i).element));
@@ -62,9 +63,13 @@ $(document).ready(function(){
     svg.append($(this));
   });
 
-  // $("rect").on("click", function() {
-  //   alert("You clicked a riding with " + people[$(this).attr("id")].length + " people.");
-  // })
+  $("rect").on("click", function() {
+    var peopleList = people[$(this).attr("id")]
+    var person = peopleList[Math.floor(Math.random()*peopleList.length)]
+    var personUI = new PersonUI(person)
+
+    $("#opportunities").append(personUI.element);
+  })
 
   loadData();
 
