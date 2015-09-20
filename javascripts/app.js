@@ -71,5 +71,5 @@ $(document).ready(function(){
   //Test thing
   setInterval(() => {
     $("#opportunities").append(Opportunity.generateOpportunity(onChallengeAccepted).element);
-  }, 10000); 
+  }, 20000); 
 });

@@ -32,10 +32,10 @@ export default class Person {
   }
 
   update(parties, importance = 0.5) {
-    console.log("RUNNING UPDATE");
 
-    if (importance == 1.0) {
+    if (importance == 1.0 || this.parties === null || this.parties === undefined) {
       this.parties = Array.apply(null, new Array(parties.length)).map(() => {return 0;});
+      importance = 1.0;
     }
 
     var likeness = Array.apply(null, new Array(parties.length)).map(() => {return 0;}); // [-1, 1]
