@@ -1,7 +1,7 @@
 require 'json'
 require 'pp'
 
-POP_DIV = 10_000
+POP_DIV = 1_000
 
 QUESTIONS = JSON.load(IO.read('public/data/questions.json'))
 SQUARES = JSON.load(IO.read('public/data/squares.json'))
@@ -30,7 +30,7 @@ def genperson(province, is_city)
 end
 
 res = SQUARES.map do |k,sq|
-  num = [3, sq['pop'] / POP_DIV].max
+  num = [2, sq['pop'] / POP_DIV].max
   people = (1..num).map do
     genperson(sq['prov'], sq['city'])
   end
