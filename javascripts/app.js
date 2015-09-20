@@ -37,6 +37,8 @@ function onChallengeAccepted() {
     var filter = this.filter.apply(this, [location]);
     _.filter(persons, filter).forEach((person) => person.update(parties));
   }.bind(this));
+
+  // updateSvgClasses();
 }
 
 function runElection() {
@@ -52,6 +54,20 @@ function runElection() {
   return _.map(results,Math.floor);
 }
 
+function updateSvgClasses() {
+  _.forOwn(people, function(peeps, squareId) {
+    var results = Array.apply(null, new Array(parties.length)).map(() => {return 0;});
+    var realWorldPop = squares[squareId]['pop'];
+    var mult = realWorldPop / peeps.length;
+    peeps.forEach((person) => {
+      var vote = person.vote()
+      results[vote] += mult;
+    });
+    var winner = parties[results.indexOf(_.max(results))].name;
+    $("#"+squareId).attr('data-party',winner);
+  });
+}
+
 function loadData() {
   $.getJSON( "data/parties.json", function( data ) {
     parties = data;
@@ -63,6 +79,7 @@ function loadData() {
           return p;
         });
       });
+      // updateSvgClasses();
       // window.people = people;
       // window.peeps = _.flatten(_.values(people));
     });
