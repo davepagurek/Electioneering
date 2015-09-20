@@ -1,15 +1,18 @@
 var $ = require("jquery");
 
 export default class Opportunity {
-  constructor(question, action, callback = function(){}, importance = 0.5, squares = null) {
+  constructor(question, action, callback = function(){}, importance = 0.5, squares = null, icon = "calendar") {
     this.element = $(
       `
       <div class="opportunity animated bounceIn">
+        <div class="opportunity_photo">
+          <i class="fa"></i>
+        </div>
+        <h3></h3>
+        <button class="opportunity_do"></button>
         <button class="close">
           <i class="fa fa-times"></i>
         </button>
-        <h3></h3>
-        <button class="opportunity_do"></button>
       </div>
       `
     );
@@ -36,7 +39,10 @@ export default class Opportunity {
         })
       }
     });
-      
+
+    $('.opportunity_photo > i', this.element).addClass("fa-" + icon);
+    $('.opportunity_photo', this.element).addClass("opportunity_icon_" + icon);
+
     this.setTimer();
     this.element.find("h3").text(question);
     this.importance = importance;
