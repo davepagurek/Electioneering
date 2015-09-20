@@ -229,3 +229,8 @@ body {
     font-weight: lighter;
   }
 }
+
+.highlight {
+    fill: $highlight_poll !important;
+    stroke-color: $highlight_poll !important;
+}

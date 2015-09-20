@@ -5,6 +5,10 @@ POP_DIV = 1_000
 
 QUESTIONS = JSON.load(IO.read('public/data/questions.json'))
 SQUARES = JSON.load(IO.read('public/data/squares.json'))
+PARTIES = JSON.load(IO.read('public/data/parties.json'))
+
+CONSERVATIVE = PARTIES.last['views']
+LIBERAL = PARTIES.first['views']
 
 def fuzz(x)
   x + (rand()-0.5)*2*0.2
@@ -14,17 +18,23 @@ def genperson(province, is_city)
   stat_prov = (['NT', 'YT', 'NU'].include? province) ? 'SK' : province
   person = {}
 
-  person['views'] = QUESTIONS.map do |q|
+  base_views = QUESTIONS.map do |q|
     yes = rand() < q[stat_prov]
-    strength = [0.0, [1.0, fuzz(q['power'])].min].max
+    strength = fuzz(q['power'])
     ((yes ? 1 : -1) * strength).round(2)
   end
   # seniors are less common, everyone else is even
-  person['age'] = if rand() < 0.19
+  person['age'] = age = if rand() < 0.19
     rand(65..90)
   else
     rand(20..64)
   end
+  # Conservative bias with age
+  con_bias = CONSERVATIVE.map {|x| x * (2.3/70.0) * (age-20)}
+  city_bias_factor = is_city ? 0.6 : 0.0
+  lib_bias = LIBERAL.map {|x| x * city_bias_factor}
+  views = [base_views, con_bias, lib_bias].transpose.map {|x| x.reduce(:+)}
+  person['views'] = views.map {|x| [0.0, [1.0, x].min].max.round(2) }
 
   person
 end
