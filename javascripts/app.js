@@ -115,16 +115,13 @@ var getPoll = function() {
     var poll = {};
     var r;
 
-    // Poll question
-    // * Party affinity
-    // * Specfic question (out of 38)
-    r = Math.random();
-    if (r < 0.2) {
-        poll.type = "party";
-    } else {
-        poll.type = "question";
-        poll.question = Math.floor(38 * Math.random());
-    }
+    // Location
+    poll.square = randSquare();
+    var p = squares[poll.square];
+    var people = [];
+
+    // Number of samples
+    poll.n = 50000 + Math.floor(50000 * Math.random());
 
     // Poll methods:
     // * Phone // Biased age 18..90
@@ -134,11 +131,51 @@ var getPoll = function() {
     r = Math.random();
     if (r < 0.25) {
         poll.method = "Phone";
+        poll.minAge = 18;
+        poll.maxAge = 90;
     } else if (r < 0.5) {
         poll.method = "Online";
+        poll.minAge = 12;
+        poll.maxAge = 40;
     } else if (r < 0.75) {
         poll.method = "Door to door";
+        poll.minAge = 25;
+        poll.maxAge = 90;
     } else {
         poll.method = "Mail";
+        poll.minAge = 50;
+        poll.maxAge = 90;
     }
+
+    for (var i = 0; i < p.length; i++) {
+        if (poll.minAge <= p[i].age && p[i].age <= poll.maxAge) {
+            people.append(p[i])
+        }
+    }
+    
+    if (people.length == 0) {
+        return null;
+    }
+
+    // Poll question
+    // * Party affinity
+    // * Specfic question (out of 38)
+    r = Math.random();
+    if (r < 0.2) {
+        poll.type = "party";
+        poll.parties = [0.0, 0.0, 0.0];
+        for (var i = 0; i < poll.n; i++) {
+            poll.parties[people[Math.floor(people.length() * Math.random())].pollVote()]++;
+        }
+    } else {
+        poll.type = "question";
+        poll.question = Math.floor(38 * Math.random());
+        poll.answer = 0.0;
+        for (var i = 0; i < poll.n; i++) {
+            if (people[Math.floor(people.length() * Math.random())].views[poll.question] > 0) {
+                poll.answer += 1.0;
+           }
+        }
+    }
+    return poll;
 }
