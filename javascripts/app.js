@@ -168,8 +168,7 @@ $(document).ready(function(){
                     $("#modal-container").append(new Modal(poll.company + " poll", pollResult(poll)).element);
                     $("#modal-container .modal").modal("show");
                     drawCharts(poll, $("#modal-container .modal"));
-                    highlightForPoll(poll);
-                })).element);
+                }, 1.0, [poll.square])).element);
 
                 //(new Opportunity(poll.company + " has conducted " + poll.type + ".", "View Results", function() { highlightForPoll(poll); })).element);
     }, 10000);
@@ -349,11 +348,3 @@ function drawCharts(poll, modal) {
     chart.draw(data, options);
   }
 }
-
-function highlightForPoll(poll) {
-    var k = $("#" + poll.square)[0];
-    k.classList.add("highlight");
-    setTimeout(() => {
-        k.classList.remove("highlight");
-    }, 10000);
-};
