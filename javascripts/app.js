@@ -80,9 +80,5 @@ $(document).ready(function(){
   //Test thing
   setInterval(() => {
     $("#opportunities").append(Opportunity.generateOpportunity(onChallengeAccepted).element);
-<<<<<<< HEAD
   }, 20000);
-=======
-  }, 10000);
->>>>>>> Do updates on affinities on load of people
 });
