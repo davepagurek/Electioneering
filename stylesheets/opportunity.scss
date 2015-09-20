@@ -16,17 +16,17 @@
 }
 
 .opportunity {
-  padding:30px 10px 10px 10px;
-  overflow:hidden;
-  position: relative;
-  background-color: rgba(0,0,0,0.05);
-  color: $dark;
+  flex-direction:row;
+  padding:10px;
+  box-sizing: border-box;
+  background-color:rgba(0,0,0,0.05);
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
   -webkit-animation-duration: .75s;
   animation-duration: .75s;
   -webkit-animation-name: slideInRight;
   animation-name: slideInRight;
+  overflow:hidden;
   transition: background 1s ease;
 
   &:nth-child(even) {
@@ -50,6 +50,22 @@
     &:hover {
       background-color: $medium_dark;
     }
+  }
+
+  .opportunity_photo {
+    width: 25px;
+    height:25px;
+    line-height:25px;
+    font-size:15px;
+    text-align:center;
+    margin-bottom:5px;
+    background-color:#BBBBBB;
+    color:#444;
+  }
+
+  .opportunity_icon_calendar {
+    background-color:#EE4444;
+    color:#FFF;
   }
 }
 

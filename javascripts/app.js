@@ -168,7 +168,7 @@ $(document).ready(function(){
                     $("#modal-container").append(new Modal(poll.company + " poll", pollResult(poll)).element);
                     $("#modal-container .modal").modal("show");
                     drawCharts(poll, $("#modal-container .modal"));
-                }, 1.0, [poll.square])).element);
+                }, 1.0, [poll.square], "bar-chart")).element);
 
                 //(new Opportunity(poll.company + " has conducted " + poll.type + ".", "View Results", function() { highlightForPoll(poll); })).element);
     }, 10000);
@@ -284,12 +284,12 @@ function pollResult(poll){
     // // Set a callback to run when the Google Visualization API is loaded.
     // window.google.setOnLoadCallback(drawChart);
 
-    // // Callback that creates and populates a data table, 
+    // // Callback that creates and populates a data table,
     // // instantiates the pie chart, passes in the data and
     // // draws it.
     // function drawChart() {
     //   if (poll.type == "party"){
-        
+
     //   }
 
     // }
