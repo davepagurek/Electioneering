@@ -33,7 +33,6 @@ export default class Alignment {
     this.selector.on("mousedown", () => window.addEventListener('mousemove', mouseMove, true))
 
     var startX = ((value + 1)/2) * 200;
-    console.log(startX);
     this.selector.css("left", `${startX}px`);
   }
 }

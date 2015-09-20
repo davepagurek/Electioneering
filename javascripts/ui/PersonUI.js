@@ -7,10 +7,13 @@ export default class PersonUI {
   constructor(person){
     this.person = person;
     this.element = $(`
-        <div>
+        <div class="tweet">
           <div class="person-name">${this.getName()}</div>
           <div class="person-age">${person.age}</div>
           <div class="person-party">Leans ${this.getParty()}</div>
+           <button class="close">
+             <i class="fa fa-times"></i>
+           </button>
         </div>
       `);
   }

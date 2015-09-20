@@ -74,6 +74,14 @@ $(document).ready(function(){
       return p.name.toLowerCase() == party;
     });
 
+    tweets = tweets.map(function(tweet) {
+      var newTweet = tweet.tweet.replace(/obama[\w]*/ig, politician.name);
+      return {
+        tweet: newTweet,
+        positivity: tweet.positivity
+      }
+    });
+
     $("rect").on("click", function() {
       var peopleList = people[$(this).attr("id")]
       var person = peopleList[Math.floor(Math.random()*peopleList.length)]
@@ -100,7 +108,7 @@ $(document).ready(function(){
         _.sample(tweets).tweet,
         riding.id
       ).element);
-    }, 5000);
+    }, 11000);
 
     //Test thing
     setInterval(() => {
