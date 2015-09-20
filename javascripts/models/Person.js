@@ -32,7 +32,6 @@ export default class Person {
   }
 
   update(parties, importance = 0.5) {
-    console.log("Updating!");
 
     if (importance == 1.0 || this.parties === null || this.parties === undefined) {
       this.parties = Array.apply(null, new Array(parties.length)).map(() => {return 0;});

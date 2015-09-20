@@ -39,12 +39,17 @@ function onChallengeAccepted() {
 }
 
 function loadData() {
-  $.getJSON( "data/people.json", function( data ) {
-    people = _.mapValues(data, function(p) {
-      return _.map(p, function(p){
-        return new Person(p);
-      });
+  $.getJSON( "data/parties.json", function( data ) {
+    parties = data;
+    $.getJSON( "data/people.json", function( data ) {
+      people = _.mapValues(data, function(p) {
+        return _.map(p, function(p){
+          var p = new Person(p);
+          p.update(parties, 1.0)
+          return p;
+        });
     });
+  });
   });
   $.getJSON( "data/questions.json", function( data ) {
     data.forEach((stance, i) => $("#stances").append(new Stance(parties[0], stance.question, i).element));
@@ -75,5 +80,9 @@ $(document).ready(function(){
   //Test thing
   setInterval(() => {
     $("#opportunities").append(Opportunity.generateOpportunity(onChallengeAccepted).element);
+<<<<<<< HEAD
   }, 20000);
+=======
+  }, 10000);
+>>>>>>> Do updates on affinities on load of people
 });
