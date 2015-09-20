@@ -14,48 +14,6 @@
     "NL": 0.33
   },
   {
-    "question": "Do you support a national daycare policy?",
-    "category": "domestic_policy",
-    "power": 0.5,
-    "ON": 0.72,
-    "BC": 0.76,
-    "AB": 0.68,
-    "SK": 0.72,
-    "MB": 0.74,
-    "NB": 0.78,
-    "NS": 0.78,
-    "QC": 0.7,
-    "NL": 0.81
-  },
-  {
-    "question": "Do you support the Northern Gateway pipeline project?",
-    "category": "environment",
-    "power": 0.3,
-    "ON": 0.38,
-    "BC": 0.32,
-    "AB": 0.62,
-    "SK": 0.48,
-    "MB": 0.38,
-    "NB": 0.45,
-    "NS": 0.37,
-    "QC": 0.34,
-    "NL": 0.41
-  },
-  {
-    "question": "In order to reduce energy costs, should the government nationalize or privatize the energy sector?",
-    "category": "domestic_policy",
-    "power": 0.3,
-    "ON": 0.36,
-    "BC": 0.38,
-    "AB": 0.49,
-    "SK": 0.44,
-    "MB": 0.4,
-    "NB": 0.39,
-    "NS": 0.36,
-    "QC": 0.35,
-    "NL": 0.38
-  },
-  {
     "question": "Should Canada allow the logging of old growth forests?",
     "category": "environment",
     "power": 0.1,
@@ -70,20 +28,6 @@
     "NL": 0.39
   },
   {
-    "question": "Should Canada increase or decrease foreign aid spending?",
-    "category": "foreign_policy",
-    "power": 0.4,
-    "ON": 0.36,
-    "BC": 0.36,
-    "AB": 0.31,
-    "SK": 0.32,
-    "MB": 0.37,
-    "NB": 0.31,
-    "NS": 0.35,
-    "QC": 0.46,
-    "NL": 0.41
-  },
-  {
     "question": "Should Canada increase or decrease military defense spending?",
     "category": "foreign_policy",
     "power": 0.6,
@@ -96,20 +40,6 @@
     "NS": 0.33,
     "QC": 0.22,
     "NL": 0.31
-  },
-  {
-    "question": "Should Canada pursue free trade deals with other countries?",
-    "category": "economic_policy",
-    "power": 0.3,
-    "ON": 0.8,
-    "BC": 0.77,
-    "AB": 0.82,
-    "SK": 0.81,
-    "MB": 0.81,
-    "NB": 0.81,
-    "NS": 0.81,
-    "QC": 0.82,
-    "NL": 0.83
   },
   {
     "question": "Should Canada raise or lower the tax rate for corporations?",
@@ -196,48 +126,6 @@
     "NL": 0.24
   },
   {
-    "question": "Should employment insurance be given to those who work seasonal jobs including tourism, fishery and farming?",
-    "category": "economic_policy",
-    "power": 0.2,
-    "ON": 0.75,
-    "BC": 0.71,
-    "AB": 0.64,
-    "SK": 0.68,
-    "MB": 0.72,
-    "NB": 0.81,
-    "NS": 0.8,
-    "QC": 0.77,
-    "NL": 0.84
-  },
-  {
-    "question": "Should marijuana be legalized for recreational use?",
-    "category": "healthcare",
-    "power": 0.4,
-    "ON": 0.7,
-    "BC": 0.77,
-    "AB": 0.67,
-    "SK": 0.68,
-    "MB": 0.7,
-    "NB": 0.72,
-    "NS": 0.76,
-    "QC": 0.73,
-    "NL": 0.78
-  },
-  {
-    "question": "Should nonviolent drug offenders be given mandatory jail sentences?",
-    "category": "domestic_policy",
-    "power": 0.5,
-    "ON": 0.16,
-    "BC": 0.16,
-    "AB": 0.21,
-    "SK": 0.21,
-    "MB": 0.18,
-    "NB": 0.17,
-    "NS": 0.15,
-    "QC": 0.15,
-    "NL": 0.16
-  },
-  {
     "question": "Should postsecondary education be a provincial or federal responsibility?",
     "category": "education",
     "power": 0.2,
@@ -308,20 +196,6 @@
     "NL": 0.9
   },
   {
-    "question": "Should the employee contribution rate for the Canadian Pension Plan (CPP) be raised above its current 4.49% rate?",
-    "category": "economic_policy",
-    "power": 0.5,
-    "ON": 0.34,
-    "BC": 0.34,
-    "AB": 0.3,
-    "SK": 0.34,
-    "MB": 0.34,
-    "NB": 0.32,
-    "NS": 0.32,
-    "QC": 0.35,
-    "NL": 0.33
-  },
-  {
     "question": "Should the federal government be able to monitor phone calls and emails?",
     "category": "domestic_policy",
     "power": 0.4,
@@ -334,34 +208,6 @@
     "NS": 0.32,
     "QC": 0.3,
     "NL": 0.3
-  },
-  {
-    "question": "Should the federal government elect or abolish the Senate?",
-    "category": "domestic_policy",
-    "power": 0.4,
-    "ON": 0.48,
-    "BC": 0.49,
-    "AB": 0.51,
-    "SK": 0.43,
-    "MB": 0.47,
-    "NB": 0.47,
-    "NS": 0.47,
-    "QC": 0.4,
-    "NL": 0.48
-  },
-  {
-    "question": "Should the federal government invest in urban, commuter rail infrastructure?",
-    "category": "domestic_policy",
-    "power": 0.4,
-    "ON": 0.83,
-    "BC": 0.83,
-    "AB": 0.77,
-    "SK": 0.7,
-    "MB": 0.73,
-    "NB": 0.71,
-    "NS": 0.77,
-    "QC": 0.83,
-    "NL": 0.76
   },
   {
     "question": "Should the federal government put a cap on university tuition rates?",
@@ -406,34 +252,6 @@
     "NL": 0.85
   },
   {
-    "question": "Should the government allow TransCanada to expropriate private property for the construction of the Keystone pipeline?",
-    "category": "environment",
-    "power": 0.1,
-    "ON": 0.27,
-    "BC": 0.23,
-    "AB": 0.45,
-    "SK": 0.36,
-    "MB": 0.3,
-    "NB": 0.32,
-    "NS": 0.25,
-    "QC": 0.24,
-    "NL": 0.27
-  },
-  {
-    "question": "Should the government allow digital publishers to place locks on their content (MP3s, etc)?",
-    "category": "domestic_policy",
-    "power": 0.3,
-    "ON": 0.35,
-    "BC": 0.34,
-    "AB": 0.35,
-    "SK": 0.35,
-    "MB": 0.35,
-    "NB": 0.33,
-    "NS": 0.33,
-    "QC": 0.35,
-    "NL": 0.33
-  },
-  {
     "question": "Should the government enact a stricter immigration policy?",
     "category": "immigration",
     "power": 0.4,
@@ -474,20 +292,6 @@
     "NS": 0.5,
     "QC": 0.52,
     "NL": 0.54
-  },
-  {
-    "question": "Should the government reinstate the long form mandatory census?",
-    "category": "domestic_policy",
-    "power": 0.2,
-    "ON": 0.64,
-    "BC": 0.62,
-    "AB": 0.53,
-    "SK": 0.55,
-    "MB": 0.6,
-    "NB": 0.58,
-    "NS": 0.63,
-    "QC": 0.65,
-    "NL": 0.64
   },
   {
     "question": "Should the government use economic stimulus to aid the country during times of recession?",
