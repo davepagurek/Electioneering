@@ -34,7 +34,7 @@ function onChallengeAccepted() {
 
   _.forIn(people, function(persons, location){
     var filter = this.filter.apply(this, [location]);
-    _.filter(persons).forEach((person) => person.update(parties));
+    _.filter(persons, filter).forEach((person) => person.update(parties));
   }.bind(this));
 }
 
@@ -57,6 +57,10 @@ $(document).ready(function(){
     svg.append($(this));
   });
 
+  // $("rect").on("click", function() {
+  //   alert("You clicked a riding with " + people[$(this).attr("id")].length + " people.");
+  // })
+
   loadData();
 
   setInterval(() => {
@@ -72,4 +76,5 @@ $(document).ready(function(){
   setInterval(() => {
     $("#opportunities").append(Opportunity.generateOpportunity(onChallengeAccepted).element);
   }, 20000); 
+
 });
