@@ -27,6 +27,9 @@ var politician = {
 var stances = null;
 var squares = null;
 
+// Load the Visualization API and the piechart package.
+window.google.load('visualization', '1', {'packages':['corechart']});
+
 function onChallengeAccepted() {
   // this = opportunity
 
@@ -126,19 +129,36 @@ $(document).ready(function(){
       $("#opportunities").append(Opportunity.generateOpportunity(onChallengeAccepted).element);
     }, 20000);
 
+    setInterval(() => {
+        var poll = getPoll();
+        if (!poll) {
+            return;
+        }
+        $("#opportunities").append(
+                (new Opportunity(poll.company + " has conducted a poll.", "View Results", ()=>{
+                    $("#modal-container").empty();
+                    $("#modal-container").append(new Modal(poll.company + " poll", pollResult(poll)).element);
+                    $("#modal-container .modal").modal("show");
+                    drawCharts(poll, $("#modal-container .modal"));
+                    viewPoll(poll);
+                })).element);
+
+                //(new Opportunity(poll.company + " has conducted " + poll.type + ".", "View Results", function() { viewPoll(poll); })).element);
+    }, 5000);
+
   }).element);
 
 
 });
 
-var genCompany = function() {
+function genCompany() {
     var a = ["The ", "Bob's ", "Amalgamated ", "Super ", "Terrestrial ", ""];
     var b = ["Hammer ", "Plier ", "Screwdriver ", "Combination Mill/Drill ", "Compound Radial Arm Saw ", "Free Software "];
     var c = ["Company", "Inc.", "LLC", "Limited", "Coop", "Empire", "Emporium"];
     return a[Math.floor(Math.random() * a.length)] + b[Math.floor(Math.random() * b.length)] + c[Math.floor(Math.random() * c.length)];
 };
 
-var getPoll = function() {
+function getPoll() {
     var randSquare = function() {
         var x = Math.floor(Math.random() * 63);
         var y = Math.floor(Math.random() * 49);
@@ -219,17 +239,74 @@ var getPoll = function() {
 };
 
 function pollResult(poll){
+
+    // // Set a callback to run when the Google Visualization API is loaded.
+    // window.google.setOnLoadCallback(drawChart);
+
+    // // Callback that creates and populates a data table, 
+    // // instantiates the pie chart, passes in the data and
+    // // draws it.
+    // function drawChart() {
+    //   if (poll.type == "party"){
+        
+    //   }
+
+    // }
+
+    if (poll.type == "party"){
+
+      return `
+      <br>
+      <div id="chart_div"></div>`;
+    } else {
+      return `Question: ${stances[poll.question].question}<br>
+       <div id="chart_div"></div>`;
+    }
+}
+
+function drawCharts(poll, modal) {
+  var chart_div = modal.find("#chart_div").get(0);
   if (poll.type == "party"){
-    return `Liberal: ${poll.parties[0]}
-    NDP: ${poll.parties[1]}
-    Conservative: ${poll.parties[2]}`;
+    // Create the data table.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Party');
+    data.addColumn('number', 'Support');
+    data.addRows([
+      ['Liberal', poll.parties[0]],
+      ['NDP', poll.parties[1]],
+      ['Conservative', poll.parties[2]],
+    ]);
+
+    var options = {'title':'Poll results - By Party',
+                     'width':400,
+                     'height':300,
+                    'colors': ['red', 'orange', 'blue']};
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(chart_div);
+    chart.draw(data, options);
   } else {
-    return `Question: ${stances[poll.question].question}
-     Approve: ${poll.answer} (${((poll.answer/poll.n)*100).toFixed(2)}%)`;
+    // poll.type = question
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Response');
+    data.addColumn('number', 'Support');
+    data.addRows([
+      ['Approve', poll.answer],
+      ['Disapprove', poll.n - poll.answer]
+    ]);
+
+    var options = {'title':'Poll results - By Issue',
+                     'width':400,
+                     'height':300,
+                    'colors': ['blue', 'red']};
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.PieChart(chart_div);
+    chart.draw(data, options);
   }
 }
 
-var viewPoll = function(poll) {
+function viewPoll(poll) {
     var k = $("#" + poll.square)[0];
     k.classList.add("highlight");
     setTimeout(() => {
@@ -240,17 +317,4 @@ var viewPoll = function(poll) {
 };
 
 //Test thing
-setInterval(() => {
-    var poll = getPoll();
-    if (!poll) {
-        return;
-    }
-    $("#opportunities").append(
-            (new Opportunity(poll.company + " has conducted a poll.", "View Results", ()=>{
-                $("#modal-container").empty();
-                $("#modal-container").append(new Modal(poll.company + " poll", pollResult(poll)).element);
-                $("#modal-container .modal").modal("show");
-            })).element);
 
-            //(new Opportunity(poll.company + " has conducted " + poll.type + ".", "View Results", function() { viewPoll(poll); })).element);
-}, 5000);
