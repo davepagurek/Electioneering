@@ -7,16 +7,25 @@ export default class PersonUI {
   constructor(person){
     this.person = person;
     this.element = $(`
-        <div class="tweet animated bounceIn">
-          <div class="person-name">${this.getName()}</div>
-          <div class="person-age">${person.age}</div>
-          <div class="person-party">Leans ${this.getParty()}</div>
+        <div class="tweet">
+          <div class="person_photo">
+            <i class="fa fa-user"></i>
+          </div>
+          <div class="tweet_text">
+            <div class="person-name">Name: <strong>${this.getName()}</strong></div>
+            <div class="person-age">Age: <strong>${person.age}</strong></div>
+            <div class="person-party">Leans <strong>${this.getParty()}</strong></div>
+          </div>
            <button class="close">
              <i class="fa fa-times"></i>
            </button>
         </div>
       `);
     this.setTimer();
+    this.element.find(".close").on("click", () => {
+      this.remove();
+    });
+
   }
 
   setTimer() {
