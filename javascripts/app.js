@@ -140,26 +140,26 @@ var getPoll = function() {
     // Number of samples
     poll.n = 50000 + Math.floor(50000 * Math.random());
 
-    // Poll methods:
+    // Poll types:
     // * Phone // Biased age 18..90
     // * Online // Biased age 12..40
     // * Door to door // Biased 25..90
     // * Mail // Biased 50..90
     r = Math.random();
     if (r < 0.25) {
-        poll.method = "Phone";
+        poll.type = "a phone poll";
         poll.minAge = 18;
         poll.maxAge = 90;
     } else if (r < 0.5) {
-        poll.method = "Online";
+        poll.type = "an online poll";
         poll.minAge = 12;
         poll.maxAge = 40;
     } else if (r < 0.75) {
-        poll.method = "Door to door";
+        poll.type = "a door to door poll";
         poll.minAge = 25;
         poll.maxAge = 90;
     } else {
-        poll.method = "Mail";
+        poll.type = "a mail poll";
         poll.minAge = 50;
         poll.maxAge = 90;
     }
@@ -197,6 +197,16 @@ var getPoll = function() {
     return poll;
 };
 
+var viewPoll = function(poll) {
+    var k = $("#" + poll.square)[0];
+    k.classList.add("highlight");
+    setTimeout(() => {
+        k.classList.remove("highlight");
+    }, 10000);
+    console.log(k);
+    console.log(poll);
+};
+
 //Test thing
 setInterval(() => {
     var poll = getPoll();
@@ -204,5 +214,5 @@ setInterval(() => {
         return;
     }
     $("#opportunities").append(
-            (new Opportunity(poll.company + " has conducted a poll.", "View Results")).element);
+            (new Opportunity(poll.company + " has conducted " + poll.type + ".", "View Results", function() { viewPoll(poll); })).element);
 }, 5000);
