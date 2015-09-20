@@ -6,11 +6,8 @@ var Stance = require("./ui/Stance.js");
 var Opportunity = require("./ui/Opportunity.js");
 var Person = require("./models/Person");
 var Tweet = require("./ui/Tweet.js");
-<<<<<<< HEAD
 var PersonUI = require("./ui/PersonUI.js");
-=======
 var Start = require("./ui/Start.js");
->>>>>>> Add party selector
 
 var parties = [
   {
