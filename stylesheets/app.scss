@@ -70,7 +70,7 @@ body {
   background-color:rgba(0,0,0,0.5);
 
   .start {
-     width:400px;
+     width:420px;
      box-sizing:border-box;
      background-color:$medium;
      padding:20px;
@@ -102,6 +102,20 @@ body {
        }
        &:focus {
          outline:0;
+       }
+     }
+
+     button {
+       border:0;
+       background-color:$medium_darker;
+       color:$bright;
+       padding:8px 10px;
+       border-radius:5px;
+       transition: all 0.3s ease;
+       cursor:pointer;
+
+       &:hover {
+         background-color: $medium_dark;
        }
      }
 
